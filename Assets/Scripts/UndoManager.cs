@@ -7,11 +7,11 @@ public class UndoManager : MonoBehaviour
 {
     CardManager cardManager;
     public List<Undo> Undos;
-    ViewManager cardViewManager;
+    ViewManager viewManager;
     private void Awake()
     {
         cardManager = FindObjectOfType<CardManager>();
-        cardViewManager = FindObjectOfType<ViewManager>();
+        viewManager = FindObjectOfType<ViewManager>();
     }
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class UndoManager : MonoBehaviour
 
     public void Undo()
     {
-        if (cardViewManager.IsAnyCardAnimating() || Undos.Count == 0) return;
+        if (viewManager.IsAnyCardAnimating() || Undos.Count == 0) return;
 
         Pile oriPile = cardManager.AllPiles[Undos.Last().OriPileIndex];
         Pile curPile = cardManager.AllPiles[Undos.Last().CurPileIndex];
@@ -45,8 +45,8 @@ public class UndoManager : MonoBehaviour
         //List<bool> newFaceUps = new List<bool>();
         
 
-        PileView oriPileView = cardViewManager.PileToPileView(oriPile);
-        PileView newPileView = cardViewManager.PileToPileView(curPile);
+        PileView oriPileView = viewManager.PileToPileView[oriPile];
+        PileView newPileView = viewManager.PileToPileView[curPile];
 
         for (int i = curPile.Cards.IndexOf(card); i < curPile.Cards.Count; i++)
         {
@@ -82,10 +82,10 @@ public class UndoManager : MonoBehaviour
 
         for (int i = 0; i < cards.Count; i++)
         {
-            CardView cardView = oriPileView.CardToCardView(cards[i]);
+            CardView cardView = viewManager.CardToCardView[cards[i]];
             if (!cardView)
             {
-                cardView = Instantiate(cardViewManager.CardPrefab, FindObjectOfType<Canvas>().transform).GetComponent<CardView>();
+                cardView = Instantiate(viewManager.CardPrefab, FindObjectOfType<Canvas>().transform).GetComponent<CardView>();
                 cardView.transform.position = oriPileView.transform.position;
                 cardView.Card = cards[i];
                 cardView.Card.IsFaceUp = false;

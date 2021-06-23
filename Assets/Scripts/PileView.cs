@@ -6,19 +6,45 @@ using UnityEngine.UI;
 public class PileView : MonoBehaviour
 {
     public Pile Pile;
-    public List<CardView> CardViews = new List<CardView>();
+    //public List<CardView> CardViews = new List<CardView>();
 
     GameManager gameManager;
-    ViewManager cardViewManager;
+    ViewManager viewManager;
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
-        cardViewManager = FindObjectOfType<ViewManager>();
+        viewManager = FindObjectOfType<ViewManager>();
+    }
+
+    private void Start()
+    {
+        UpdatePileView();
+    }
+
+    public void CreateCardViews()
+    {
+        for (int i = 0; i < Pile.Cards.Count; i++)
+        {
+            CardView cardView = Instantiate(viewManager.CardPrefab, transform).GetComponent<CardView>();
+            cardView.Card = Pile.Cards[i];
+            viewManager.CardToCardView.Add(Pile.Cards[i], cardView);
+            cardView.gameObject.SetActive(false);
+            //CardViews.Add(cardView);
+        }
     }
 
     public void UpdatePileView()
     {
-        DestroyChildren();
+        foreach (Card card in Pile.Cards)
+        {
+            CardView cardView = viewManager.CardToCardView[card];
+            cardView.transform.SetParent(transform);
+            cardView.transform.SetAsLastSibling();
+            cardView.gameObject.SetActive(true);
+            cardView.UpdateCardView(cardView.transform.position);
+        }
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
+        /*DestroyChildren();
         // Get viewable cards count
         int firstShownCardIdex = 0;
         if (Pile.Type == Pile.PileType.talon) firstShownCardIdex = Mathf.Clamp(Pile.Cards.Count - 2, 0, Pile.Cards.Count - 1);
@@ -33,46 +59,6 @@ public class PileView : MonoBehaviour
             if (Pile.Type == Pile.PileType.talon) cardView.Card.IsFaceUp = true;
             cardView.UpdateCardView();
             CardViews.Add(cardView);
-        }
+        }*/
     }
-
-    void DestroyChildren()
-    {
-        List<GameObject> childList = new List<GameObject>();
-        int childCount = transform.childCount;
-        for (int i = 0; i < childCount; i++)
-        {
-            GameObject child = transform.GetChild(i).gameObject;
-            childList.Add(child);
-        }
-        for (int i = 0; i < childCount; i++)
-        {
-            DestroyImmediate(childList[i]);
-        }
-    }
-
-    public CardView CardToCardView(Card card)
-    {
-        foreach (CardView cardView in CardViews)
-        {
-            if (cardView.Card == card)
-            {
-                return cardView;
-            }
-        }
-        return null;
-    }
-
-    public CardView CardToCardView(Card card, List<CardView> cardViews)
-    {
-        foreach (CardView cardView in cardViews)
-        {
-            if (cardView.Card == card)
-            {
-                return cardView;
-            }
-        }
-        return null;
-    }
-
 }

@@ -11,13 +11,13 @@ public class HandManager: MonoBehaviour
     public Image Highlight;
     public float HighlightTimer = 0;
 
-    ViewManager cardViewManager;
+    ViewManager viewManager;
     CardManager cardManager;
     GameManager gameManager;
 
     private void Awake()
     {   
-        cardViewManager = FindObjectOfType<ViewManager>();
+        viewManager = FindObjectOfType<ViewManager>();
         cardManager = FindObjectOfType<CardManager>();
         gameManager = FindObjectOfType<GameManager>();
     }
@@ -44,7 +44,10 @@ public class HandManager: MonoBehaviour
 
             }
             Undo undo = new Undo(cardManager.Hand.Cards[0], cardManager.AllPiles.IndexOf(cardManager.Talon), cardManager.AllPiles.IndexOf(cardManager.Hand), true);
+
             FindObjectOfType<UndoManager>().Undos.Add(undo);
+            viewManager.HandView.UpdatePileView();
+            viewManager.TalonView.UpdatePileView();
         }
 
         // Deal hand to talon
@@ -58,10 +61,12 @@ public class HandManager: MonoBehaviour
                 Undo undo = new Undo(cardManager.Hand.Cards[i], cardManager.AllPiles.IndexOf(cardManager.Hand), cardManager.AllPiles.IndexOf(cardManager.Talon), true, true);
                 FindObjectOfType<UndoManager>().Undos.Add(undo);
                 cardManager.UpdateData(cardManager.Hand.Cards[i], cardManager.Hand, cardManager.Talon);
+
             }
+            viewManager.TalonView.UpdatePileView();
+            viewManager.HandView.UpdatePileView();
         }
 
-        cardViewManager.TalonView.UpdatePileView();
-        cardViewManager.HandView.UpdatePileView();
+
     }
 }

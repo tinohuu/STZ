@@ -119,6 +119,34 @@ public class CardManager : MonoBehaviour
         oldPile.Cards.Remove(card);
         newPile.Cards.Add(card);
     }
+
+    public Pile GetFoundationDest(Card card)
+    {
+        foreach (Pile pile in Foundations)
+        {
+            if (pile.Cards.Count == 0)
+            {
+                if (card.Number == 1) return pile;
+            }
+            else if (pile.Cards.Last().Suit == card.Suit && pile.Cards.Last().Number == card.Number - 1)
+                return pile;
+        }
+        return null;
+    }
+
+    public Pile GetTableauDest(Card card)
+    {
+        foreach (Pile pile in Tableau)
+        {
+            if (pile.Cards.Count == 0)
+            {
+                if (card.Number == 13 && !pile.Cards.Contains(card)) return pile;
+            }
+            else if (pile.Cards.Last().Color != card.Color && pile.Cards.Last().Number == card.Number + 1)
+                return pile;
+        }
+        return null;
+    }
 }
 
 [System.Serializable]

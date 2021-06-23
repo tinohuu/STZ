@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 243435413}
   - component: {fileID: 243435412}
+  - component: {fileID: 243435414}
   m_Layer: 5
   m_Name: PileView
   m_TagString: Untagged
@@ -155,7 +156,6 @@ MonoBehaviour:
   Pile:
     Type: 0
     Cards: []
-  CardViews: []
 --- !u!224 &243435413
 RectTransform:
   m_ObjectHideFlags: 0
@@ -168,13 +168,39 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6670941269082503363}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &243435414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243435411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 5
+  m_Spacing: -100
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &393441360
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +232,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1422964424}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -254,7 +280,6 @@ MonoBehaviour:
   Pile:
     Type: 0
     Cards: []
-  CardViews: []
 --- !u!222 &393441364
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -275,7 +300,7 @@ GameObject:
   - component: {fileID: 411548086}
   - component: {fileID: 411548087}
   m_Layer: 5
-  m_Name: Tableau
+  m_Name: TableauArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,7 +318,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1422964424}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -352,7 +377,7 @@ GameObject:
   - component: {fileID: 446426100}
   - component: {fileID: 446426099}
   m_Layer: 5
-  m_Name: Foundations
+  m_Name: FoundationArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -524,7 +549,7 @@ RectTransform:
   m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children: []
   m_Father: {fileID: 6670941269082503363}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1060,10 +1085,9 @@ RectTransform:
   - {fileID: 1493036831}
   - {fileID: 6670941269082503363}
   - {fileID: 446426098}
-  - {fileID: 393441361}
   - {fileID: 411548085}
+  - {fileID: 393441361}
   - {fileID: 1959395353}
-  - {fileID: 1577997910}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1084,16 +1108,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405ee7e277aaa4c4c832600c194a3a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Area: {fileID: 411548085}
-  Foundations: {fileID: 446426098}
-  Temp: {fileID: 1577997910}
+  TableauArea: {fileID: 411548085}
+  FoundationArea: {fileID: 446426098}
   PilePrefab: {fileID: 1895256396541304982, guid: 56541a0156c8c9e4984bf56d09792827, type: 3}
   CardPrefab: {fileID: 6670941268070311659, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
   TableauViews: []
   FoundationViews: []
   HandView: {fileID: 243435412}
   TalonView: {fileID: 393441363}
-  TempCardViews: []
   DraggedCardViews: []
 --- !u!114 &1422964426
 MonoBehaviour:
@@ -1254,41 +1276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Undos: []
---- !u!1 &1577997909
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1577997910}
-  m_Layer: 5
-  m_Name: TempArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1577997910
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577997909}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1422964424}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1644725982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,11 +2055,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6670941269082503363}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 44.5, y: -66}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6670941267859629715
@@ -2148,9 +2135,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 545663733}
   - {fileID: 243435413}
   - {fileID: 6670941267859629714}
+  - {fileID: 545663733}
   m_Father: {fileID: 1422964424}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2166,7 +2153,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6670941269082503362}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

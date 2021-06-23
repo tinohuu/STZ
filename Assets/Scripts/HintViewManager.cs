@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class HintViewManager : MonoBehaviour
 {
-    ViewManager cardViewManager;
+    ViewManager viewManager;
     GameManager gameManager;
+    CardManager cardManager;
     public GameObject HintTextBackground;
     public Text HintText;
     List<CardView> OriCardViews = new List<CardView>();
@@ -20,9 +21,10 @@ public class HintViewManager : MonoBehaviour
     int hintMoves = 0;
     private void Awake()
     {
-        cardViewManager = FindObjectOfType<ViewManager>();
+        viewManager = FindObjectOfType<ViewManager>();
         canvas = FindObjectOfType<Canvas>();
         gameManager = FindObjectOfType<GameManager>();
+        cardManager = FindObjectOfType<CardManager>();
     }
     // Start is called before the first frame update
     void Start()
@@ -33,44 +35,43 @@ public class HintViewManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (HintCardViews.Count != 0 && hintMoves != gameManager.Moves)
-        {
-            ClearHint();
-        }
+        // Clear hint when having a move
+        if (HintCardViews.Count != 0 && hintMoves != gameManager.Moves) ClearHint();
 
+        // Start a new hint
         if ((HintCardViews.Count == 0 || !HintCardViews[0]) && OriCardViews.Count > 0)
         {
             HintTextBackground.SetActive(true);
             HintCardViews.Clear();
             HintText.text = "Move " + (hintIndex + 1) + " of " + OriCardViews.Count;
 
-
             if (hintIndex < OriCardViews.Count)
             {
-                CardView HintCardView = Instantiate(cardViewManager.CardPrefab, canvas.transform).GetComponent<CardView>();
+                CardView HintCardView = Instantiate(viewManager.CardPrefab, canvas.transform).GetComponent<CardView>();
                 HintCardView.transform.position = TargetPositions[hintIndex];
-                //HintCardView.OriViewPos = OriCardViews[hintIndex].transform.position;
-                HintCardView.Image.transform.position = OriCardViews[hintIndex].transform.position;
-                //HintCardView.SetOriViewFaceUpData(OriCardViews[hintIndex].Card.IsFaceUp);
+                //HintCardView.Image.transform.position = OriCardViews[hintIndex].transform.position;
                 HintCardView.Card = OriCardViews[hintIndex].Card;
                 HintCardView.IsHint = true;
+                HintCardView.UpdateCardView(OriCardViews[hintIndex].transform.position);
                 HintCardViews.Add(HintCardView);
 
                 PileView pileView = OriCardViews[hintIndex].PileView;
                 if (pileView.Pile.Type == Pile.PileType.tableau)
                 {
-                    int index = pileView.CardViews.IndexOf(OriCardViews[hintIndex]);
-                    if (index != pileView.CardViews.Count - 1)
+                    int index = pileView.Pile.Cards.IndexOf(OriCardViews[hintIndex].Card);
+                    if (index != pileView.Pile.Cards.Count - 1)
                     {
-                        for (int i = index + 1; i < pileView.CardViews.Count; i++)
+                        for (int i = index + 1; i < pileView.Pile.Cards.Count; i++)
                         {
-                            CardView cardView = Instantiate(cardViewManager.CardPrefab, canvas.transform).GetComponent<CardView>();
-                            cardView.transform.position = TargetPositions[hintIndex] + pileView.CardViews[i].transform.position - OriCardViews[hintIndex].transform.position;
+                            CardView cardView = Instantiate(viewManager.CardPrefab, canvas.transform).GetComponent<CardView>();
+                            CardView oriCardView = viewManager.CardToCardView[pileView.Pile.Cards[i]];
+                            cardView.transform.position = TargetPositions[hintIndex] + oriCardView.transform.position - OriCardViews[hintIndex].transform.position;
                             //cardView.OriViewPos = pileView.CardViews[i].transform.position;
-                            HintCardView.Image.transform.position = pileView.CardViews[i].transform.position;
+                            //HintCardView.Image.transform.position = oriCardView.transform.position;
                             //HintCardView.SetOriViewFaceUpData(pileView.CardViews[i].Card.IsFaceUp);
-                            cardView.Card = pileView.CardViews[i].Card;
+                            cardView.Card = pileView.Pile.Cards[i];
                             cardView.IsHint = true;
+                            cardView.UpdateCardView(oriCardView.transform.position);
                             HintCardViews.Add(cardView);
                         }
                     }
@@ -87,14 +88,18 @@ public class HintViewManager : MonoBehaviour
 
     public void Hint()
     {
+        // Count moves
         hintMoves = gameManager.Moves;
 
+        // Clear hints
         ClearHint();
 
-        if (cardViewManager.TalonView.CardViews.Count > 0)
+        // Talon
+        if (cardManager.Talon.Cards.Count > 0)
         {
-            CardView ori = cardViewManager.TalonView.CardViews.Last();
-            Vector3? target = FindTargetCardView(ori);
+            Card card = cardManager.Talon.Cards.Last();
+            CardView ori = viewManager.CardToCardView[card];
+            Vector3? target = GetDestPos(card);
             if (target != null)
             {
                 OriCardViews.Add(ori);
@@ -102,58 +107,73 @@ public class HintViewManager : MonoBehaviour
             }
         }
 
-        foreach (PileView pileView in cardViewManager.TableauViews)
+        // First face-up card
+        foreach (Pile pile in cardManager.Tableau)
         {
-            CardView ori = null;
-            foreach (CardView cardView in pileView.CardViews)
+            Card card = null;
+            foreach (Card c in pile.Cards)
             {
-                if (cardView.Card.IsFaceUp)
+                if (c.IsFaceUp)
                 {
-                    ori = cardView;
+                    card = c;
                     break;
                 }
             }
-            if (!ori) continue;
+            if (card == null) continue;
 
-            Vector3? target = FindTargetCardView(ori);
+            Vector3? target = GetDestPos(card);
             if (target != null)
             {
-                OriCardViews.Add(ori);
+                OriCardViews.Add(viewManager.CardToCardView[card]);
                 TargetPositions.Add((Vector3)target);
             }
         }
 
-        foreach (PileView pileView in cardViewManager.TableauViews)
+        // Last tableau card
+        foreach (Pile pile in cardManager.Tableau)
         {
-            if (pileView.CardViews.Count == 0) continue;
+            if (pile.Cards.Count == 0) continue;
 
-            CardView ori = pileView.CardViews.Last();
+            Card card = pile.Cards.Last();
 
-            if (OriCardViews.Contains(ori)) continue;
+            if (OriCardViews.Contains(viewManager.CardToCardView[card])) continue;
 
-            Vector3? target = FindFoundationTarget(ori);
+            Vector3? target = GetDestPos(card, true, false);
             if (target != null)
             {
-                OriCardViews.Add(ori);
+                OriCardViews.Add(viewManager.CardToCardView[card]);
                 TargetPositions.Add((Vector3)target);
             }
         }
 
+        // Highlight hand card
         if (OriCardViews.Count == 0) FindObjectOfType<HandManager>().HighlightTimer = Time.time + 1;
     }
 
-    Vector3? FindTargetCardView(CardView cardView)
+    Vector3? GetDestPos(Card card, bool isToFoundation = true, bool isToTableau = true)
     {
-        Vector3? target = FindFoundationTarget(cardView);
-        if (target != null) return target;
-        return FindTableauTarget(cardView);
+        Pile destPile = null;
+        PileView pileView = null;
+        if (isToFoundation) destPile = cardManager.GetFoundationDest(card);
+        if (destPile != null) pileView = viewManager.PileToPileView[destPile];
+        if (isToTableau) destPile = cardManager.GetTableauDest(card);
+        if (destPile != null) pileView = viewManager.PileToPileView[destPile];
+
+        if (destPile != null && pileView)
+        {
+            if (destPile.Cards.Count == 0) return pileView.transform.position;
+            else return viewManager.CardToCardView[destPile.Cards.Last()].transform.position;
+        }
+
+        return null;
     }
 
-    Vector3? FindFoundationTarget(CardView cardView)
+    /*
+    Vector3? FindFoundationTarget(Card cardView)
     {
         if (cardView == cardView.PileView.CardViews.Last())
         {
-            foreach (PileView pileView in cardViewManager.FoundationViews)
+            foreach (PileView pileView in viewManager.FoundationViews)
             {
                 if (pileView.CardViews.Count == 0)
                 {
@@ -170,9 +190,9 @@ public class HintViewManager : MonoBehaviour
 
     Vector3? FindTableauTarget(CardView cardView)
     {
-        foreach (PileView pileView in cardViewManager.TableauViews)
+        foreach (PileView pileView in viewManager.TableauViews)
         {
-            if (pileView.CardViews.Count == 0)
+            if (pileView.Pile.Cards.Count == 0)
             {
                 if (cardView.Card.Number == 13 && cardView.PileView.CardViews[0] != cardView) return pileView.transform.position;
             }
@@ -181,7 +201,7 @@ public class HintViewManager : MonoBehaviour
                 return pileView.CardViews.Last().transform.position + Vector3.up * -40;
         }
         return null;
-    }
+    }*/
 
     void ClearHint()
     {

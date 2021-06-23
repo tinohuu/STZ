@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class ViewManager : MonoBehaviour
 {
-    public Transform Area;
-    public Transform Foundations;
-    public Transform Temp;
+    public Transform TableauArea;
+    public Transform FoundationArea;
     //GameObject CardPrefab;
     public GameObject PilePrefab;
     public GameObject CardPrefab;
@@ -16,46 +15,53 @@ public class ViewManager : MonoBehaviour
     public List<PileView> FoundationViews;
     public PileView HandView;
     public PileView TalonView;
+
     //public List<CardView> TempCardViews = new List<CardView>();
     CardManager cardManager;
     UndoManager undoManager;
     GameManager gameManager;
-    PileView OriDraggedPile;
+    PileView DraggedFrom;
     public List<CardView> DraggedCardViews = new List<CardView>();
-    public Dictionary<Card, Vector3> CardViewOldPos = new Dictionary<Card, Vector3>();
+    public Dictionary<Card, CardView> CardToCardView = new Dictionary<Card, CardView>();
+    public Dictionary<Pile, PileView> PileToPileView = new Dictionary<Pile, PileView>();
     private void Awake()
     {
         cardManager = FindObjectOfType<CardManager>();
         gameManager = FindObjectOfType<GameManager>();
         undoManager = FindObjectOfType<UndoManager>();
     }
-
     void Start()
     {
         // Initialise tableau pile views
         for (int i = 0; i < cardManager.Tableau.Length; i++)
         {
-            PileView pileView = Instantiate(PilePrefab, Area).GetComponent<PileView>();
+            PileView pileView = Instantiate(PilePrefab, TableauArea).GetComponent<PileView>();
             pileView.Pile = cardManager.Tableau[i];
-            pileView.UpdatePileView();
+            pileView.CreateCardViews();
             TableauViews.Add(pileView);
+            PileToPileView.Add(cardManager.Tableau[i], pileView);
         }
 
         // Initialise foundation pile views
         for (int i = 0; i < 4; i++)
         {
-            PileView pileView = Instantiate(PilePrefab, Foundations).GetComponent<PileView>();
+            PileView pileView = Instantiate(PilePrefab, FoundationArea).GetComponent<PileView>();
             pileView.Pile = cardManager.Foundations[i];
             pileView.GetComponent<VerticalLayoutGroup>().spacing = -pileView.GetComponent<RectTransform>().rect.height;
-            pileView.UpdatePileView();
+            pileView.CreateCardViews();
             FoundationViews.Add(pileView);
+            PileToPileView.Add(cardManager.Foundations[i], pileView);
         }
 
         // Initialise talon pile views
         TalonView.Pile = cardManager.Talon;
+        TalonView.CreateCardViews();
         TalonView.UpdatePileView();
+        PileToPileView.Add(cardManager.Talon, TalonView);
         HandView.Pile = cardManager.Hand;
-        TalonView.UpdatePileView();
+        HandView.CreateCardViews();
+        HandView.UpdatePileView();
+        PileToPileView.Add(cardManager.Hand, HandView);
     }
 
 
@@ -64,7 +70,7 @@ public class ViewManager : MonoBehaviour
         Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
         if (!screenRect.Contains(Input.mousePosition) || Input.GetMouseButtonUp(0)) OnPileEndDrag();
     }
-    public void OnPileBeginDrag(PileView pileView, CardView cardView)
+    public void OnBeginDragCard(Card card)
     {
         if (IsAnyCardAnimating()) return;
 
@@ -75,13 +81,14 @@ public class ViewManager : MonoBehaviour
         }
 
         // Store original pile
-        OriDraggedPile = pileView;
+        DraggedFrom = CardToCardView[card].PileView;
 
         // Initialise dragged pile
-        for (int i = pileView.CardViews.IndexOf(cardView); i < pileView.CardViews.Count; i++)
+        for (int i = DraggedFrom.Pile.Cards.IndexOf(card); i < DraggedFrom.Pile.Cards.Count; i++)
         {
-            DraggedCardViews.Add(pileView.CardViews[i]);
-            pileView.CardViews[i].OverrideSorting(true, i);
+            CardView cardView = CardToCardView[DraggedFrom.Pile.Cards[i]];
+            DraggedCardViews.Add(cardView);
+            cardView.OverrideSorting(true, i);
         }
     }
     public void OnPileDrag(Vector3 pos)
@@ -147,7 +154,7 @@ public class ViewManager : MonoBehaviour
                     //return;
                 }
             }
-            else if (TableauViews[i].Pile != OriDraggedPile.Pile
+            else if (TableauViews[i].Pile != DraggedFrom.Pile
                 && TableauViews[i].Pile.Cards.Last().Color != DraggedCardViews[0].Card.Color
                 && TableauViews[i].Pile.Cards.Last().Number == DraggedCardViews[0].Card.Number + 1)
             {
@@ -163,7 +170,7 @@ public class ViewManager : MonoBehaviour
             PileView closestPileView = AlternativePileViews[0];
             foreach (PileView pileView in AlternativePileViews)
             {
-                float dis = Vector3.Distance(DraggedCardViews[0].Image.transform.position, pileView.CardViews.Count > 0 ? pileView.CardViews.Last().transform.position : pileView.transform.position);
+                float dis = Vector3.Distance(DraggedCardViews[0].Image.transform.position, pileView.Pile.Cards.Count > 0 ? CardToCardView[pileView.Pile.Cards.Last()].transform.position : pileView.transform.position);
                 //Debug.LogWarning(dis);
                 if (closestDistance > dis)
                 {
@@ -177,12 +184,12 @@ public class ViewManager : MonoBehaviour
 
 
             // Scoring
-            if (OriDraggedPile.Pile.Type == Pile.PileType.talon)
+            if (DraggedFrom.Pile.Type == Pile.PileType.talon)
             {
                 if (closestPileView.Pile.Type == Pile.PileType.foundation) gameManager.Score += 15;
                 else if (closestPileView.Pile.Type == Pile.PileType.tableau) gameManager.Score += 10;
             }
-            if (OriDraggedPile.Pile.Type == Pile.PileType.foundation && closestPileView.Pile.Type == Pile.PileType.tableau) gameManager.Score -= 15;
+            if (DraggedFrom.Pile.Type == Pile.PileType.foundation && closestPileView.Pile.Type == Pile.PileType.tableau) gameManager.Score -= 15;
 
             DragToNew(closestPileView);
             return;
@@ -191,11 +198,12 @@ public class ViewManager : MonoBehaviour
         // Return to original
         for (int i = 0; i < DraggedCardViews.Count; i++)
         {
-            if (DraggedCardViews[i])
-                CardViewOldPos.Add(DraggedCardViews[i].Card, DraggedCardViews[i].Image.transform.position);
+            DraggedCardViews[i].UpdateCardView(DraggedCardViews[i].transform.position);
+            //if (DraggedCardViews[i])
+            //    CardViewOldPos.Add(DraggedCardViews[i].Card, DraggedCardViews[i].Image.transform.position);
             //    AnimateCardInPileView(DraggedCardViews[i].Card, DraggedCardViews[i].Image.transform.position, OriDraggedPile);//  DraggedCardViews[i].CardToPileView(OriDraggedPile); //DraggedPile.CardViews[i].transform.SetParent(OriDraggedPile.transform);
             DraggedCardViews[i].GetComponentInChildren<Animator>().SetTrigger("Shake");
-            Debug.LogWarning("Shake");
+            //Debug.LogWarning("Shake");
         }
         DraggedCardViews.Clear();
     }
@@ -204,63 +212,33 @@ public class ViewManager : MonoBehaviour
     {
         // Start to count game time
         if (gameManager.InitialTime == -1) gameManager.InitialTime = Time.time;
-
+        // Count moves
         gameManager.Moves++;
+
+        Card card = DraggedCardViews[0].Card;
+        int index = DraggedFrom.Pile.Cards.IndexOf(card);
+        bool isLastCardUp = index != 0 && DraggedFrom.Pile.Cards[index - 1].IsFaceUp;
+        Undo undo = new Undo(DraggedCardViews[0].Card, cardManager.AllPiles.IndexOf(DraggedFrom.Pile), cardManager.AllPiles.IndexOf(newPile.Pile), isLastCardUp);
+        undoManager.Undos.Add(undo);
 
         for (int j = 0; j < DraggedCardViews.Count; j++)
         {
-            if (j == 0)
-            {
-                Card card = DraggedCardViews[j].Card;
-                int index = OriDraggedPile.Pile.Cards.IndexOf(card);
-                bool isLastCardUp = index != 0 && OriDraggedPile.Pile.Cards[index - 1].IsFaceUp;
-                Undo undo = new Undo(DraggedCardViews[j].Card, cardManager.AllPiles.IndexOf(OriDraggedPile.Pile), cardManager.AllPiles.IndexOf(newPile.Pile), isLastCardUp);
-                undoManager.Undos.Add(undo);
-            }
-
-            CardViewOldPos.Add(DraggedCardViews[j].Card, DraggedCardViews[j].Image.transform.position);
-
-            cardManager.UpdateData(DraggedCardViews[j].Card, OriDraggedPile.Pile, newPile.Pile);
-
-
-            /*//OriDraggedPile.Pile.Remove(DraggedCardViews[j].Card);
-            OriDraggedPile.CardViews.Remove(DraggedCardViews[j]);
-
-            if (OriDraggedPile.Pile.Count > 0 && j == DraggedCardViews.Count - 1)
-            {
-                if (OriDraggedPile.PileType == PileView.Type.tableau && !OriDraggedPile.Pile[OriDraggedPile.Pile.Count - 1].IsFaceUp)
-                    gameManager.Score += 5;
-                OriDraggedPile.Pile[OriDraggedPile.Pile.Count - 1].IsFaceUp = true;
-            }
-
-
-
-            //newPile.Pile.Add(DraggedCardViews[j].Card);
-            //newPile.UpdateCardView(DraggedCardViews[j].Card);
-            newPile.UpdatePileView();
-            /*if (newPile.PileType == PileView.Type.tableau)
-            {
-                AnimateCardInPileView(DraggedCardViews[j].Card, DraggedCardViews[j].Image.transform.position, newPile);
-            }
-            else if (newPile.PileType == PileView.Type.foundation)
-            {
-                AnimateCardInPileView(DraggedCardViews[j].Card, DraggedCardViews[j].Image.transform.position, newPile);
-            }*/
+            cardManager.UpdateData(DraggedCardViews[j].Card, DraggedFrom.Pile, newPile.Pile);
         }
 
-        if (OriDraggedPile.Pile.Cards.Count > 0)
+        if (DraggedFrom.Pile.Cards.Count > 0)
         {
-            if (OriDraggedPile.Pile.Type == Pile.PileType.tableau && !OriDraggedPile.Pile.Cards.Last().IsFaceUp)
+            if (DraggedFrom.Pile.Type == Pile.PileType.tableau && !DraggedFrom.Pile.Cards.Last().IsFaceUp)
                 gameManager.Score += 5;
-            OriDraggedPile.Pile.Cards.Last().IsFaceUp = true;
+            DraggedFrom.Pile.Cards.Last().IsFaceUp = true;
         }
 
-        OriDraggedPile.UpdatePileView();
+        DraggedFrom.UpdatePileView();
         newPile.UpdatePileView();
         DraggedCardViews.Clear();
     }
 
-    public PileView PileToPileView(Pile pile)
+    /*public PileView PileToPileView(Pile pile)
     {
         if (TalonView.Pile == pile) return TalonView;
         if (HandView.Pile == pile) return HandView;
@@ -273,7 +251,7 @@ public class ViewManager : MonoBehaviour
             if (pileView.Pile == pile) return pileView;
         }
         return null;
-    }
+    }*/
 
     public void Shuffle()
     {
@@ -290,21 +268,7 @@ public class ViewManager : MonoBehaviour
 
     public bool IsAnyCardAnimating()
     {
-        foreach (PileView pileView in TableauViews)
-        {
-            foreach (CardView cardView in pileView.CardViews)
-            {
-                if (cardView.IsAnimating) return true;
-            }
-        }
-        foreach (PileView pileView in FoundationViews)
-        {
-            foreach (CardView cardView in pileView.CardViews)
-            {
-                if (cardView.IsAnimating) return true;
-            }
-        }
-        foreach (CardView cardView in TalonView.CardViews)
+        foreach (CardView cardView in CardToCardView.Values)
         {
             if (cardView.IsAnimating) return true;
         }
