@@ -196,15 +196,18 @@ public class ViewManager : MonoBehaviour
         }
 
         // Return to original
+        bool canShake = Vector3.Distance(DraggedCardViews[0].Image.transform.position, DraggedCardViews[0].transform.position) < 1;
+        //Debug.LogWarning("Dis " + Vector3.Distance(DraggedCardViews[0].Image.transform.position, DraggedCardViews[0].transform.position) + " " + canShake.ToString());
         for (int i = 0; i < DraggedCardViews.Count; i++)
         {
-            DraggedCardViews[i].UpdateCardView(DraggedCardViews[i].transform.position);
+            //DraggedCardViews[i].UpdateCardView(DraggedCardViews[i].transform.position);
             //if (DraggedCardViews[i])
             //    CardViewOldPos.Add(DraggedCardViews[i].Card, DraggedCardViews[i].Image.transform.position);
             //    AnimateCardInPileView(DraggedCardViews[i].Card, DraggedCardViews[i].Image.transform.position, OriDraggedPile);//  DraggedCardViews[i].CardToPileView(OriDraggedPile); //DraggedPile.CardViews[i].transform.SetParent(OriDraggedPile.transform);
-            DraggedCardViews[i].GetComponentInChildren<Animator>().SetTrigger("Shake");
+            if (canShake) DraggedCardViews[i].GetComponentInChildren<Animator>().SetTrigger("Shake");
             //Debug.LogWarning("Shake");
         }
+        DraggedFrom.UpdatePileView();
         DraggedCardViews.Clear();
     }
 

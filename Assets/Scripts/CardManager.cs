@@ -95,6 +95,7 @@ public class CardManager : MonoBehaviour
         for(int i = 0; i < Hand.Cards.Count; i++)
         {
             Hand.Cards[i] = flippedCards[i];
+            flippedCards[i].IsFaceUp = false;
         }
 
         int flippedIndex = Hand.Cards.Count;

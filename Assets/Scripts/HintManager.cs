@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HintViewManager : MonoBehaviour
+public class HintManager : MonoBehaviour
 {
     ViewManager viewManager;
     GameManager gameManager;
@@ -48,7 +48,7 @@ public class HintViewManager : MonoBehaviour
             if (hintIndex < OriCardViews.Count)
             {
                 CardView HintCardView = Instantiate(viewManager.CardPrefab, canvas.transform).GetComponent<CardView>();
-                HintCardView.transform.position = TargetPositions[hintIndex];
+                HintCardView.transform.position = TargetPositions[hintIndex] + Vector3.up * ((OriCardViews[0].PileView.Pile.Type == Pile.PileType.tableau)? -40 : 0);
                 //HintCardView.Image.transform.position = OriCardViews[hintIndex].transform.position;
                 HintCardView.Card = OriCardViews[hintIndex].Card;
                 HintCardView.IsHint = true;
@@ -65,7 +65,7 @@ public class HintViewManager : MonoBehaviour
                         {
                             CardView cardView = Instantiate(viewManager.CardPrefab, canvas.transform).GetComponent<CardView>();
                             CardView oriCardView = viewManager.CardToCardView[pileView.Pile.Cards[i]];
-                            cardView.transform.position = TargetPositions[hintIndex] + oriCardView.transform.position - OriCardViews[hintIndex].transform.position;
+                            cardView.transform.position = TargetPositions[hintIndex] + oriCardView.transform.position - OriCardViews[hintIndex].transform.position - Vector3.up * 40;
                             //cardView.OriViewPos = pileView.CardViews[i].transform.position;
                             //HintCardView.Image.transform.position = oriCardView.transform.position;
                             //HintCardView.SetOriViewFaceUpData(pileView.CardViews[i].Card.IsFaceUp);
@@ -156,7 +156,7 @@ public class HintViewManager : MonoBehaviour
         PileView pileView = null;
         if (isToFoundation) destPile = cardManager.GetFoundationDest(card);
         if (destPile != null) pileView = viewManager.PileToPileView[destPile];
-        if (isToTableau) destPile = cardManager.GetTableauDest(card);
+        if (isToTableau && destPile == null) destPile = cardManager.GetTableauDest(card);
         if (destPile != null) pileView = viewManager.PileToPileView[destPile];
 
         if (destPile != null && pileView)

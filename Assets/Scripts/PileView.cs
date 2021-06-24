@@ -41,7 +41,7 @@ public class PileView : MonoBehaviour
             cardView.transform.SetParent(transform);
             cardView.transform.SetAsLastSibling();
             cardView.gameObject.SetActive(true);
-            cardView.UpdateCardView(cardView.transform.position);
+            cardView.UpdateCardView(cardView.Image.transform.position);
         }
         //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
         /*DestroyChildren();

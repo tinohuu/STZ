@@ -46,7 +46,7 @@ public class UndoManager : MonoBehaviour
         
 
         PileView oriPileView = viewManager.PileToPileView[oriPile];
-        PileView newPileView = viewManager.PileToPileView[curPile];
+        PileView curPileView = viewManager.PileToPileView[curPile];
 
         for (int i = curPile.Cards.IndexOf(card); i < curPile.Cards.Count; i++)
         {
@@ -54,6 +54,8 @@ public class UndoManager : MonoBehaviour
             //Debug.LogWarning("NewPileIndex " + i);
             //Debug.LogWarning("Card " + card.Suit + card.Number);
             cards.Add(curPile.Cards[i]);
+            if (curPile.Type == Pile.PileType.hand) curPile.Cards[i].IsFaceUp = true;
+            if (curPile.Type == Pile.PileType.talon) curPile.Cards[i].IsFaceUp = false;
             //CardView cardView = newPileView.CardToCardView(curPile[i]);
 
             //newPositions.Add(cardView ? cardView.transform.position : newPileView.transform.position);
@@ -99,7 +101,7 @@ public class UndoManager : MonoBehaviour
 
         //Debug.LogWarning("Test4");
         oriPileView.UpdatePileView();
-        newPileView.UpdatePileView();
+        curPileView.UpdatePileView();
         Undos.RemoveAt(Undos.Count - 1);
         FindObjectOfType<GameManager>().Moves++;
     }

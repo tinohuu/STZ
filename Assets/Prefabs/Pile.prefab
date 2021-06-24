@@ -64,7 +64,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: -91.8
+  m_Spacing: -50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -84,5 +84,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ef9a7b064a33941a3698006a22f0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pile: []
-  CardPrefab: {fileID: 6670941268070311659, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+  Pile:
+    Type: 0
+    Cards: []
