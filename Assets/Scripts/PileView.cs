@@ -38,6 +38,7 @@ public class PileView : MonoBehaviour
         foreach (Card card in Pile.Cards)
         {
             CardView cardView = viewManager.CardToCardView[card];
+            cardView.Alpha = 0;
             cardView.transform.SetParent(transform);
             cardView.transform.SetAsLastSibling();
             cardView.gameObject.SetActive(true);

@@ -33,7 +33,7 @@ public class HandManager: MonoBehaviour
         gameManager.StartCountTime();
 
         // Reset hand
-        if (cardManager.Hand.Cards.Count == 0)
+        if (cardManager.Hand.Cards.Count == 0 && cardManager.Talon.Cards.Count > 1)
         {
             if (cardManager.Talon.Cards.Count > 0) gameManager.Score -= 15;
             List<Card> cards = new List<Card>(cardManager.Talon.Cards);
@@ -66,7 +66,5 @@ public class HandManager: MonoBehaviour
             viewManager.TalonView.UpdatePileView();
             viewManager.HandView.UpdatePileView();
         }
-
-
     }
 }

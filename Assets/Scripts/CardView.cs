@@ -13,12 +13,13 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     public Text NumberText;
     public Text SuitSmallText;
     public Text SuitBigText;
-    public GameObject Highlight;
+    public Image Highlight;
 
     public bool IsHint = false;
     public bool IsPlaceholder = false;
     public float FlipAnimTimer = -1;
-    public Vector3? OriPos = null;
+    public Vector3? AnimStartPos = null;
+    public float AnimStartTime = 0;
 
     GameManager gameManager;
     Canvas canvas = null;
@@ -30,18 +31,22 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     {
         gameManager = FindObjectOfType<GameManager>();
         viewManager = FindObjectOfType<ViewManager>();
-        
+        Alpha = 0;
+
+
     }
     private void Start()
     {
         //Animate();
-        if (!IsHint) UpdateCardView();
+        InitialiseCardView();
+        //if (!IsHint) Alpha = 1;
         FlipAnimTimer = Card.IsFaceUp ? 1 : -1;
     }
 
     private void Update()
     {
         Animate();
+        if (Back.color.a == 0) Alpha = 1;
     }
 
     public void OnBeginDrag(PointerEventData data)
@@ -74,44 +79,20 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         if (!Card.IsFaceUp || IsHint) return;
         viewManager.OnPileEndDrag();
     }
-    public void UpdateCardView(Vector3? oriPos = null)
+    public void UpdateCardView(Vector3? animStartPos = null, float animPauseTime = 0)
     {
 
 
-        Highlight.SetActive(IsHint);
+        Highlight.gameObject.SetActive(IsHint);
 
-        OriPos = oriPos;
-
-        if (Card.Number == 1) NumberText.text = "A";
-        else if (Card.Number == 11) NumberText.text = "J";
-        else if (Card.Number == 12) NumberText.text = "Q";
-        else if (Card.Number == 13) NumberText.text = "K";
-        else NumberText.text = Card.Number.ToString();
-
-        if (Card.Suit == Card.SuitType.clubs)
+        if (animStartPos != null)
         {
-            SuitSmallText.text = "♣";
-            SuitBigText.text = "♣";
-        }
-        else if (Card.Suit == Card.SuitType.diamonds)
-        {
-            SuitSmallText.text = "♦";
-            SuitBigText.text = "♦";
-        }
-        else if (Card.Suit == Card.SuitType.hearts)
-        {
-            SuitSmallText.text = "♥";
-            SuitBigText.text = "♥";
-        }
-        else if (Card.Suit == Card.SuitType.spades)
-        {
-            SuitSmallText.text = "♠";
-            SuitBigText.text = "♠";
+            AnimStartPos = animStartPos;
+            AnimStartTime = Time.time + animPauseTime;
         }
 
-        NumberText.color = Card.Color;
-        SuitSmallText.color = Card.Color;
-        SuitBigText.color = Card.Color;
+
+        Alpha = 0;
     }
 
     /*public void CardToPileView(PileView pileView)
@@ -124,7 +105,6 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     {
         if (Card.IsFaceUp && FlipAnimTimer <= 1)
         {
-
             FlipAnimTimer += Time.deltaTime * gameManager.AnimationSpeed / 2;
         }
 
@@ -136,17 +116,18 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         Back.transform.localScale = new Vector3(Mathf.Clamp(-FlipAnimTimer, 0, 1), 1, 1);
 
 
-        if (OriPos != null)
+        if (AnimStartPos != null)
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
-            Image.transform.position = (Vector3)OriPos;
-            Image.gameObject.SetActive(true);
+            Image.transform.position = (Vector3)AnimStartPos;
+            //Image.gameObject.SetActive(true);
             isAnimatingMove = true;
-            OriPos = null;
+            AnimStartPos = null;
+            //Alpha = 1;
         }
 
-        if (isAnimatingMove)
+        if (isAnimatingMove && Time.time >= AnimStartTime)
         {
             if (IsHint) Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * gameManager.AnimationSpeed / 2);
             else Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * gameManager.AnimationSpeed);
@@ -178,5 +159,53 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     public PileView PileView
     {
         get { return transform.parent.GetComponent<PileView>(); }
+    }
+
+    public float Alpha
+    {
+        set
+        {
+            Back.SetAlpha(value);
+            Face.SetAlpha(value);
+            NumberText.SetAlpha(value);
+            SuitSmallText.SetAlpha(value);
+            SuitBigText.SetAlpha(value);
+            Highlight.SetAlpha(value);
+        }
+    }
+
+    void InitialiseCardView()
+    {
+        if (Card.Number == 1) NumberText.text = "A";
+        else if (Card.Number == 11) NumberText.text = "J";
+        else if (Card.Number == 12) NumberText.text = "Q";
+        else if (Card.Number == 13) NumberText.text = "K";
+        else NumberText.text = Card.Number.ToString();
+
+        if (Card.Suit == Card.SuitType.clubs)
+        {
+            SuitSmallText.text = "♣";
+            SuitBigText.text = "♣";
+        }
+        else if (Card.Suit == Card.SuitType.diamonds)
+        {
+            SuitSmallText.text = "♦";
+            SuitBigText.text = "♦";
+        }
+        else if (Card.Suit == Card.SuitType.hearts)
+        {
+            SuitSmallText.text = "♥";
+            SuitBigText.text = "♥";
+        }
+        else if (Card.Suit == Card.SuitType.spades)
+        {
+            SuitSmallText.text = "♠";
+            SuitBigText.text = "♠";
+        }
+
+        Color cardColor = new Color(Card.Color.r, Card.Color.g, Card.Color.b, 0);
+        NumberText.color = cardColor;
+        SuitSmallText.color = cardColor;
+        SuitBigText.color = cardColor;
     }
 }

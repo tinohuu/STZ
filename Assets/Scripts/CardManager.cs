@@ -121,30 +121,32 @@ public class CardManager : MonoBehaviour
         newPile.Cards.Add(card);
     }
 
-    public Pile GetFoundationDest(Card card)
+    public Pile GetFoundationDest(Card card, Pile pile)
     {
-        foreach (Pile pile in Foundations)
+        if (card != pile.Cards.Last()) return null;
+        foreach (Pile foundationPile in Foundations)
         {
-            if (pile.Cards.Count == 0)
+            if (foundationPile.Cards.Count == 0)
             {
-                if (card.Number == 1) return pile;
+                if (card.Number == 1) return foundationPile;
             }
-            else if (pile.Cards.Last().Suit == card.Suit && pile.Cards.Last().Number == card.Number - 1)
-                return pile;
+            else if (foundationPile.Cards.Last().Suit == card.Suit && foundationPile.Cards.Last().Number == card.Number - 1)
+                return foundationPile;
         }
         return null;
     }
 
-    public Pile GetTableauDest(Card card)
+    public Pile GetTableauDest(Card card, Pile pile)
     {
-        foreach (Pile pile in Tableau)
+        if (card.Number == 13 && card == pile.Cards[0]) return null;
+        foreach (Pile tableauPile in Tableau)
         {
-            if (pile.Cards.Count == 0)
+            if (tableauPile.Cards.Count == 0)
             {
-                if (card.Number == 13 && !pile.Cards.Contains(card)) return pile;
+                if (card.Number == 13 && !tableauPile.Cards.Contains(card)) return tableauPile;
             }
-            else if (pile.Cards.Last().Color != card.Color && pile.Cards.Last().Number == card.Number + 1)
-                return pile;
+            else if (tableauPile.Cards.Last().Color != card.Color && tableauPile.Cards.Last().Number == card.Number + 1)
+                return tableauPile;
         }
         return null;
     }
