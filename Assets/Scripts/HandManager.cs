@@ -25,7 +25,7 @@ public class HandManager: MonoBehaviour
     void Update()
     {
         Highlight.gameObject.SetActive(Time.time < HighlightTimer);
-        NumberText.text = cardManager.Hand.Cards.Count.ToString();
+        NumberText.text = cardManager.Hand.Cards.Count == 0 ? "" : cardManager.Hand.Cards.Count.ToString();
     }
 
     public void OnPointerClick()

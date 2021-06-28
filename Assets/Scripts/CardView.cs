@@ -23,12 +23,13 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
 
     GameManager gameManager;
     Canvas canvas = null;
-
+    RectTransform rectTransform;
     public bool IsAnimating { get { return isAnimatingMove ; } }
     public bool isAnimatingMove = false;
     ViewManager viewManager;
     private void Awake()
     {
+        rectTransform = GetComponent<RectTransform>();
         gameManager = FindObjectOfType<GameManager>();
         viewManager = FindObjectOfType<ViewManager>();
         Alpha = 0;
@@ -39,12 +40,14 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     {
         //Animate();
         InitialiseCardView();
+        UpdateCardView();
         //if (!IsHint) Alpha = 1;
         FlipAnimTimer = Card.IsFaceUp ? 1 : -1;
     }
 
     private void Update()
     {
+        //Image.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         Animate();
         if (Back.color.a == 0) Alpha = 1;
     }
@@ -91,6 +94,22 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
             AnimStartTime = Time.time + animPauseTime;
         }
 
+        if (PileView && PileView.Pile.Type == Pile.PileType.tableau)
+        {
+            rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(100, 50) : new Vector2(100, 20);
+            //Image.GetComponent<RectTransform>().anchoredPosition = new Vector2(-25, -75);
+        }
+        else
+        {
+            rectTransform.sizeDelta = new Vector2(100, 150);
+            //Image.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+
+        //rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(100, 150) : new Vector2(100, 150);
+        //Image.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 150);
+        ///Image.GetComponent<RectTransform>().anchoredPosition = new Vector2(999, 999);
 
         Alpha = 0;
     }
@@ -176,6 +195,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
 
     void InitialiseCardView()
     {
+
         if (Card.Number == 1) NumberText.text = "A";
         else if (Card.Number == 11) NumberText.text = "J";
         else if (Card.Number == 12) NumberText.text = "Q";
