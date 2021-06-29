@@ -13,6 +13,11 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     public Text NumberText;
     public Text SuitSmallText;
     public Text SuitBigText;
+
+    public Image NumberImage;
+    public Image SmallSuitImage;
+    public Image BigSuitImage;
+
     public Image Highlight;
 
     public bool IsHint = false;
@@ -27,13 +32,17 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     public bool IsAnimating { get { return isAnimatingMove ; } }
     public bool isAnimatingMove = false;
     ViewManager viewManager;
+    SkinManager skinManager;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         gameManager = FindObjectOfType<GameManager>();
         viewManager = FindObjectOfType<ViewManager>();
+        skinManager = FindObjectOfType<SkinManager>();
         Alpha = 0;
 
+        Back.gameObject.SetActive(true);
+        Highlight.gameObject.SetActive(true);
 
     }
     private void Start()
@@ -186,16 +195,51 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         {
             Back.SetAlpha(value);
             Face.SetAlpha(value);
+
             NumberText.SetAlpha(value);
             SuitSmallText.SetAlpha(value);
             SuitBigText.SetAlpha(value);
+
+            NumberImage.SetAlpha(value);
+            SmallSuitImage.SetAlpha(value);
+            BigSuitImage.SetAlpha(value);
+
             Highlight.SetAlpha(value);
         }
     }
 
     void InitialiseCardView()
     {
+        // Determine whether display by text or image
+        NumberText.gameObject.SetActive(!skinManager.CurDeckSkin);
+        SuitSmallText.gameObject.SetActive(!skinManager.CurDeckSkin);
+        SuitBigText.gameObject.SetActive(!skinManager.CurDeckSkin);
 
+        NumberImage.gameObject.SetActive(skinManager.CurDeckSkin);
+        SmallSuitImage.gameObject.SetActive(skinManager.CurDeckSkin);
+        BigSuitImage.gameObject.SetActive(skinManager.CurDeckSkin);
+
+        // Display by image
+        if (skinManager.CurDeckSkin)
+        {
+            bool isRed = Card.Color == Color.red;
+            NumberImage.sprite = skinManager.GetNumberSprite(Card.Number);
+            NumberImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
+
+            SmallSuitImage.sprite = skinManager.GetSmallSuiteSprite(Card.Suit);
+            BigSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
+
+            bool canTintBig = true;
+            BigSuitImage.sprite = skinManager.GetBigSuiteSprite(Card, out canTintBig);
+            if (!BigSuitImage.sprite) BigSuitImage.sprite = SmallSuitImage.sprite;
+            if (canTintBig) BigSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
+
+            Alpha = 0;
+
+            return;
+        }
+
+        // Display by text
         if (Card.Number == 1) NumberText.text = "A";
         else if (Card.Number == 11) NumberText.text = "J";
         else if (Card.Number == 12) NumberText.text = "Q";
@@ -223,9 +267,10 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
             SuitBigText.text = "♠";
         }
 
-        Color cardColor = new Color(Card.Color.r, Card.Color.g, Card.Color.b, 0);
+        /*Color cardColor = new Color(Card.Color.r, Card.Color.g, Card.Color.b, 0);
         NumberText.color = cardColor;
         SuitSmallText.color = cardColor;
-        SuitBigText.color = cardColor;
+        SuitBigText.color = cardColor;*/
+        Alpha = 0;
     }
 }

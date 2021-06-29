@@ -2,33 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skin : MonoBehaviour
+public class DeckSkin : MonoBehaviour
 {
-    public int Durability = 0;
+    public string Name;
 
     public Sprite BoxSprite;
     public Sprite FaceSprite;
     public Sprite BackSprite;
     public Sprite HandBackSprite;
 
-    public Color RedColor = Color.white;
-    public Color Blackolor = Color.white;
+    public Color RedColor = Color.red;
+    public Color Blackolor = Color.black;
 
     public List<NumberSprite> NumberSprites;
-    public List<SmallSprite> SmallSuitSprites;
-    public List<BigSprite> BigSuitSprites;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public List<SmallSuitSprite> SmallSuitSprites;
+    public List<BigSuitSprite> BigSuitSprites;
 }
 
 [System.Serializable]
@@ -39,14 +27,14 @@ public class NumberSprite
 }
 
 [System.Serializable]
-public class SmallSprite
+public class SmallSuitSprite
 {
     public Card.SuitType Suit = Card.SuitType.spades;
     public Sprite Sprite;
 }
 
 [System.Serializable]
-public class BigSprite
+public class BigSuitSprite
 {
     public int Number = 1;
     public Card.SuitType Suit = Card.SuitType.spades;

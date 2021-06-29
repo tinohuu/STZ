@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3525777332087888429}
   - component: {fileID: -321260583282287450}
   m_Layer: 0
-  m_Name: Skin
+  m_Name: DeckSkin_Gothic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,13 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90609fd9a87801746a3686e2b72d8290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Durability: 0
-  BoxSprite: {fileID: 0}
-  FaceSprite: {fileID: 0}
-  BackSprite: {fileID: 0}
-  HandBackSprite: {fileID: 0}
-  RedColor: {r: 0.42352945, g: 0.7568628, b: 0.9921569, a: 1}
-  Blackolor: {r: 0.9921569, g: 0.7490196, b: 0.03137255, a: 1}
+  Name: Gothic
+  BoxSprite: {fileID: 21300000, guid: 40f601c7e652f4d49a4c2087c557af92, type: 3}
+  FaceSprite: {fileID: 21300000, guid: 9ef7c612b071f694c82e58b5008350b6, type: 3}
+  BackSprite: {fileID: 21300000, guid: 7adc8687872e05440a88fd9acc1dd21c, type: 3}
+  HandBackSprite: {fileID: 21300000, guid: 3f48863cd5399c04d9ecaf9b9618cdec, type: 3}
+  RedColor: {r: 0.73333335, g: 0.12941177, b: 0.13725491, a: 1}
+  Blackolor: {r: 0, g: 0, b: 0, a: 1}
   NumberSprites:
   - Number: 1
     Sprite: {fileID: 0}
@@ -57,7 +57,33 @@ MonoBehaviour:
     Sprite: {fileID: 0}
   - Number: 3
     Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
+  - Number: 3
+    Sprite: {fileID: 0}
   SmallSuitSprites:
+  - Suit: 1
+    Sprite: {fileID: 0}
+  - Suit: 1
+    Sprite: {fileID: 0}
+  - Suit: 1
+    Sprite: {fileID: 0}
   - Suit: 1
     Sprite: {fileID: 0}
   BigSuitSprites:
@@ -69,6 +95,10 @@ MonoBehaviour:
     Suit: 1
     Sprite: {fileID: 0}
     CanTint: 1
+  - Number: 11
+    Suit: 0
+    Sprite: {fileID: 0}
+    CanTint: 0
   - Number: 11
     Suit: 0
     Sprite: {fileID: 0}
