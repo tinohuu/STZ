@@ -10,6 +10,7 @@ public class HandManager: MonoBehaviour
 
     public Image Highlight;
     public float HighlightTimer = 0;
+    public Image HandCover;
 
     ViewManager viewManager;
     CardManager cardManager;
@@ -26,6 +27,7 @@ public class HandManager: MonoBehaviour
     {
         Highlight.gameObject.SetActive(Time.time < HighlightTimer);
         NumberText.text = cardManager.Hand.Cards.Count == 0 ? "" : cardManager.Hand.Cards.Count.ToString();
+        HandCover.gameObject.SetActive(cardManager.Hand.Cards.Count != 0);
     }
 
     public void OnPointerClick()

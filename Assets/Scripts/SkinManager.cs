@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkinManager : MonoBehaviour
 {
     public DeckSkin CurDeckSkin = null;
+    public Image HandCover = null;
 
+    
+    private void Start()
+    {
+        if (CurDeckSkin) HandCover.sprite = CurDeckSkin.CoverSprite;
+    }
+    /*
     public Sprite GetNumberSprite(int i)
     {
         foreach (NumberSprite numberSprite in CurDeckSkin.NumberSprites)
@@ -17,14 +25,19 @@ public class SkinManager : MonoBehaviour
         return null;
     }
 
-    public Sprite GetSmallSuiteSprite(Card.SuitType suitType)
+    public Sprite GetSmallSuiteSprite(Card.SuitType suitType, out bool canTint)
     {
         foreach (SmallSuitSprite smallSuitSprite in CurDeckSkin.SmallSuitSprites)
         {
-            if (smallSuitSprite.Suit == suitType) return smallSuitSprite.Sprite;
+            if (smallSuitSprite.Suit == suitType)
+            {
+                canTint = smallSuitSprite.CanTint;
+                return smallSuitSprite.Sprite;
+            }
         }
 
         Debug.LogError("No sprite of the suit.");
+        canTint = true;
         return null;
     }
 
@@ -32,15 +45,14 @@ public class SkinManager : MonoBehaviour
     {
         foreach (BigSuitSprite bigSuitSprite in CurDeckSkin.BigSuitSprites)
         {
-            if (bigSuitSprite.Suit == card.Suit && bigSuitSprite.Number == card.Number)
+            if ((bigSuitSprite.Suit == Card.SuitType.any || bigSuitSprite.Suit == card.Suit ) && bigSuitSprite.Number == card.Number)
             {
                 canTint = bigSuitSprite.CanTint;
                 return bigSuitSprite.Sprite;
             }
         }
 
-        Debug.LogError("No sprite of the card.");
-        canTint = false;
+        canTint = true;
         return null;
-    }
+    }*/
 }

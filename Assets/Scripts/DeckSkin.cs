@@ -4,40 +4,39 @@ using UnityEngine;
 
 public class DeckSkin : MonoBehaviour
 {
-    public string Name;
+    [Header("Settings")]
+    public int Id = 0;
+    public string Name = "NewDeckSkin";
 
     public Sprite BoxSprite;
     public Sprite FaceSprite;
     public Sprite BackSprite;
-    public Sprite HandBackSprite;
+    public Sprite CoverSprite;
 
     public Color RedColor = Color.red;
-    public Color Blackolor = Color.black;
+    public Color BlackColor = Color.black;
 
-    public List<NumberSprite> NumberSprites;
-    public List<SmallSuitSprite> SmallSuitSprites;
-    public List<BigSuitSprite> BigSuitSprites;
-}
+    public bool CanTintSmallSuit = false;
+    public bool CanTintBigSuit = false;
 
-[System.Serializable]
-public class NumberSprite
-{
-    public int Number = 1;
-    public Sprite Sprite;
-}
+    [Header("Assets")]
+    public List<Sprite> NumberSprites = new List<Sprite>();
+    public List<Sprite> SmallSuitSprites = new List<Sprite>();
+    public List<Sprite> BigSpadeSprites = new List<Sprite>();
+    public List<Sprite> BigDiamondSprites = new List<Sprite>();
+    public List<Sprite> BigHeartSprites = new List<Sprite>();
+    public List<Sprite> BigClubSprites = new List<Sprite>();
 
-[System.Serializable]
-public class SmallSuitSprite
-{
-    public Card.SuitType Suit = Card.SuitType.spades;
-    public Sprite Sprite;
-}
-
-[System.Serializable]
-public class BigSuitSprite
-{
-    public int Number = 1;
-    public Card.SuitType Suit = Card.SuitType.spades;
-    public Sprite Sprite;
-    public bool CanTint = true;
+    public List<List<Sprite>> BigSuitSprites
+    {
+        get
+        {
+            List<List<Sprite>> big = new List<List<Sprite>>();
+            big.Add(BigSpadeSprites);
+            big.Add(BigDiamondSprites);
+            big.Add(BigHeartSprites);
+            big.Add(BigClubSprites);
+            return big;
+        }
+    }
 }

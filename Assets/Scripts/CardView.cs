@@ -133,12 +133,12 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     {
         if (Card.IsFaceUp && FlipAnimTimer <= 1)
         {
-            FlipAnimTimer += Time.deltaTime * gameManager.AnimationSpeed / 2;
+            FlipAnimTimer += Time.deltaTime * gameManager.AnimationSpeed / 4;
         }
 
         if (!Card.IsFaceUp && FlipAnimTimer >= -1)
         {
-            FlipAnimTimer -= Time.deltaTime * gameManager.AnimationSpeed/ 2;
+            FlipAnimTimer -= Time.deltaTime * gameManager.AnimationSpeed/ 4;
         }
         Face.transform.localScale = new Vector3(Mathf.Clamp(FlipAnimTimer, 0, 1), 1, 1);
         Back.transform.localScale = new Vector3(Mathf.Clamp(-FlipAnimTimer, 0, 1), 1, 1);
@@ -222,17 +222,40 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         // Display by image
         if (skinManager.CurDeckSkin)
         {
-            bool isRed = Card.Color == Color.red;
+            /*bool isRed = Card.Color == Color.red;
             NumberImage.sprite = skinManager.GetNumberSprite(Card.Number);
             NumberImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
 
-            SmallSuitImage.sprite = skinManager.GetSmallSuiteSprite(Card.Suit);
-            BigSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
+            bool canTintSmall= true;
+            SmallSuitImage.sprite = skinManager.GetSmallSuiteSprite(Card.Suit, out canTintSmall);
+            if (canTintSmall) SmallSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
+            else SmallSuitImage.color = Color.white;
 
             bool canTintBig = true;
             BigSuitImage.sprite = skinManager.GetBigSuiteSprite(Card, out canTintBig);
             if (!BigSuitImage.sprite) BigSuitImage.sprite = SmallSuitImage.sprite;
             if (canTintBig) BigSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
+            else BigSuitImage.color = Color.white;
+
+            Back.sprite = skinManager.CurDeckSkin.BackSprite;
+            Back.color = Color.white;
+            Face.sprite = skinManager.CurDeckSkin.FaceSprite;*/
+
+            bool isRed = Card.Color == Color.red;
+            NumberImage.sprite = skinManager.CurDeckSkin.NumberSprites[Card.Number - 1];
+            NumberImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.BlackColor;
+
+            SmallSuitImage.sprite = skinManager.CurDeckSkin.SmallSuitSprites[(int)Card.Suit];
+            if (skinManager.CurDeckSkin.CanTintSmallSuit) SmallSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.BlackColor;
+            else SmallSuitImage.color = Color.white;
+
+            BigSuitImage.sprite = skinManager.CurDeckSkin.BigSuitSprites[(int)Card.Suit][Card.Number - 1];
+            if (skinManager.CurDeckSkin.CanTintBigSuit) BigSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.BlackColor;
+            else BigSuitImage.color = Color.white;
+
+            Back.sprite = skinManager.CurDeckSkin.BackSprite;
+            Back.color = Color.white;
+            Face.sprite = skinManager.CurDeckSkin.FaceSprite;
 
             Alpha = 0;
 
@@ -246,22 +269,22 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         else if (Card.Number == 13) NumberText.text = "K";
         else NumberText.text = Card.Number.ToString();
 
-        if (Card.Suit == Card.SuitType.clubs)
+        if (Card.Suit == Card.SuitType.club)
         {
             SuitSmallText.text = "♣";
             SuitBigText.text = "♣";
         }
-        else if (Card.Suit == Card.SuitType.diamonds)
+        else if (Card.Suit == Card.SuitType.diamond)
         {
             SuitSmallText.text = "♦";
             SuitBigText.text = "♦";
         }
-        else if (Card.Suit == Card.SuitType.hearts)
+        else if (Card.Suit == Card.SuitType.heart)
         {
             SuitSmallText.text = "♥";
             SuitBigText.text = "♥";
         }
-        else if (Card.Suit == Card.SuitType.spades)
+        else if (Card.Suit == Card.SuitType.spade)
         {
             SuitSmallText.text = "♠";
             SuitBigText.text = "♠";

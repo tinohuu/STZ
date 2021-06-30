@@ -155,7 +155,7 @@ public class CardManager : MonoBehaviour
 [System.Serializable]
 public class Card
 {
-    public enum SuitType { spades, hearts, diamonds, clubs }
+    public enum SuitType { spade, heart, diamond, club, any }
     public SuitType Suit;
     public int Number;
     public bool IsFaceUp;
@@ -169,7 +169,7 @@ public class Card
 
     public Color Color
     {
-        get { return (Suit == SuitType.hearts || Suit == SuitType.diamonds) ? Color.red : Color.black; }
+        get { return (Suit == SuitType.heart || Suit == SuitType.diamond) ? Color.red : Color.black; }
     }
 }
 
