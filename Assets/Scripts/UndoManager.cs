@@ -7,6 +7,7 @@ public class UndoManager : MonoBehaviour
 {
     CardManager cardManager;
     public List<Undo> Undos;
+    public Button UndoButton;
     ViewManager viewManager;
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class UndoManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponentInChildren<Button>().interactable = Undos.Count != 0;
+        UndoButton.interactable = Undos.Count != 0;
     }
 
     public void Undo()

@@ -6,44 +6,49 @@ using UnityEngine.UI;
 
 public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHandler, IPointerClickHandler
 {
-    public Card Card;
+    [Header("Settings")]
+    public Card Card = new Card(Card.SuitType.spade, 1);
+    public bool IsHint = false;
+    public bool HasSkin = false;
+    public bool IsPlaceholder = false; // TBR
+
+    [Header("References")]
     public Transform Image;
     public Image Back;
     public Image Face;
     public Text NumberText;
     public Text SuitSmallText;
     public Text SuitBigText;
-
+    public Image Highlight;
     public Image NumberImage;
     public Image SmallSuitImage;
     public Image BigSuitImage;
 
-    public Image Highlight;
-
-    public bool IsHint = false;
-    public bool IsPlaceholder = false;
+    [Header("Inspected")]
     public float FlipAnimTimer = -1;
     public Vector3? AnimStartPos = null;
     public float AnimStartTime = 0;
 
+    public bool IsAnimating { get { return isAnimatingMove; } }
+    public bool isAnimatingMove = false;
+
+    public Vector2 oriSize;
     GameManager gameManager;
     Canvas canvas = null;
     RectTransform rectTransform;
-    public bool IsAnimating { get { return isAnimatingMove ; } }
-    public bool isAnimatingMove = false;
     ViewManager viewManager;
-    SkinManager skinManager;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         gameManager = FindObjectOfType<GameManager>();
         viewManager = FindObjectOfType<ViewManager>();
-        skinManager = FindObjectOfType<SkinManager>();
+        oriSize = rectTransform.sizeDelta;
+        //skinManager = FindObjectOfType<SkinManager>();
         Alpha = 0;
 
         Back.gameObject.SetActive(true);
         Highlight.gameObject.SetActive(true);
-
     }
     private void Start()
     {
@@ -52,6 +57,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         UpdateCardView();
         //if (!IsHint) Alpha = 1;
         FlipAnimTimer = Card.IsFaceUp ? 1 : -1;
+        //rectTransform.sizeDelta = Image.GetComponent<RectTransform>().sizeDelta;
     }
 
     private void Update()
@@ -63,7 +69,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
 
     public void OnBeginDrag(PointerEventData data)
     {
-        if (!Card.IsFaceUp || IsHint) return;
+        if (!Card.IsFaceUp || IsHint || !PileView) return;
 
         if (PileView.Pile.Type != Pile.PileType.tableau && PileView.Pile.Cards.Last() != Card) return;
 
@@ -105,12 +111,12 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
 
         if (PileView && PileView.Pile.Type == Pile.PileType.tableau)
         {
-            rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(100, 50) : new Vector2(100, 20);
+            rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(oriSize.x, oriSize.y / 3) : new Vector2(oriSize.x, oriSize.y / 8);
             //Image.GetComponent<RectTransform>().anchoredPosition = new Vector2(-25, -75);
         }
         else
         {
-            rectTransform.sizeDelta = new Vector2(100, 150);
+            rectTransform.sizeDelta = oriSize;
             //Image.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
         //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
@@ -133,12 +139,12 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     {
         if (Card.IsFaceUp && FlipAnimTimer <= 1)
         {
-            FlipAnimTimer += Time.deltaTime * gameManager.AnimationSpeed / 4;
+            FlipAnimTimer += Time.deltaTime * gameManager.AnimationSpeed / 2;
         }
 
         if (!Card.IsFaceUp && FlipAnimTimer >= -1)
         {
-            FlipAnimTimer -= Time.deltaTime * gameManager.AnimationSpeed/ 4;
+            FlipAnimTimer -= Time.deltaTime * gameManager.AnimationSpeed/ 2;
         }
         Face.transform.localScale = new Vector3(Mathf.Clamp(FlipAnimTimer, 0, 1), 1, 1);
         Back.transform.localScale = new Vector3(Mathf.Clamp(-FlipAnimTimer, 0, 1), 1, 1);
@@ -210,57 +216,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
 
     void InitialiseCardView()
     {
-        // Determine whether display by text or image
-        NumberText.gameObject.SetActive(!skinManager.CurDeckSkin);
-        SuitSmallText.gameObject.SetActive(!skinManager.CurDeckSkin);
-        SuitBigText.gameObject.SetActive(!skinManager.CurDeckSkin);
-
-        NumberImage.gameObject.SetActive(skinManager.CurDeckSkin);
-        SmallSuitImage.gameObject.SetActive(skinManager.CurDeckSkin);
-        BigSuitImage.gameObject.SetActive(skinManager.CurDeckSkin);
-
-        // Display by image
-        if (skinManager.CurDeckSkin)
-        {
-            /*bool isRed = Card.Color == Color.red;
-            NumberImage.sprite = skinManager.GetNumberSprite(Card.Number);
-            NumberImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
-
-            bool canTintSmall= true;
-            SmallSuitImage.sprite = skinManager.GetSmallSuiteSprite(Card.Suit, out canTintSmall);
-            if (canTintSmall) SmallSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
-            else SmallSuitImage.color = Color.white;
-
-            bool canTintBig = true;
-            BigSuitImage.sprite = skinManager.GetBigSuiteSprite(Card, out canTintBig);
-            if (!BigSuitImage.sprite) BigSuitImage.sprite = SmallSuitImage.sprite;
-            if (canTintBig) BigSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.Blackolor;
-            else BigSuitImage.color = Color.white;
-
-            Back.sprite = skinManager.CurDeckSkin.BackSprite;
-            Back.color = Color.white;
-            Face.sprite = skinManager.CurDeckSkin.FaceSprite;*/
-
-            bool isRed = Card.Color == Color.red;
-            NumberImage.sprite = skinManager.CurDeckSkin.NumberSprites[Card.Number - 1];
-            NumberImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.BlackColor;
-
-            SmallSuitImage.sprite = skinManager.CurDeckSkin.SmallSuitSprites[(int)Card.Suit];
-            if (skinManager.CurDeckSkin.CanTintSmallSuit) SmallSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.BlackColor;
-            else SmallSuitImage.color = Color.white;
-
-            BigSuitImage.sprite = skinManager.CurDeckSkin.BigSuitSprites[(int)Card.Suit][Card.Number - 1];
-            if (skinManager.CurDeckSkin.CanTintBigSuit) BigSuitImage.color = isRed ? skinManager.CurDeckSkin.RedColor : skinManager.CurDeckSkin.BlackColor;
-            else BigSuitImage.color = Color.white;
-
-            Back.sprite = skinManager.CurDeckSkin.BackSprite;
-            Back.color = Color.white;
-            Face.sprite = skinManager.CurDeckSkin.FaceSprite;
-
-            Alpha = 0;
-
-            return;
-        }
+        if (HasSkin) return;
 
         // Display by text
         if (Card.Number == 1) NumberText.text = "A";
@@ -289,11 +245,5 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
             SuitSmallText.text = "♠";
             SuitBigText.text = "♠";
         }
-
-        /*Color cardColor = new Color(Card.Color.r, Card.Color.g, Card.Color.b, 0);
-        NumberText.color = cardColor;
-        SuitSmallText.color = cardColor;
-        SuitBigText.color = cardColor;*/
-        Alpha = 0;
     }
 }

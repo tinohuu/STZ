@@ -7,52 +7,56 @@ public class SkinManager : MonoBehaviour
 {
     public DeckSkin CurDeckSkin = null;
     public Image HandCover = null;
-
-    
+    public List<DeckSkinData> DeckSkins = new List<DeckSkinData>();
+    public List<BackSkinData> BackSkins = new List<BackSkinData>();
+    public Transform SkinsArea;
+    public GameObject DeckSkinViewPrefab;
+    List<DeckSkinView> deckSkinViews = new List<DeckSkinView>();
+    ViewManager viewManager;
     private void Start()
     {
+        viewManager = FindObjectOfType<ViewManager>();
+        if (CurDeckSkin) HandCover.sprite = CurDeckSkin.CoverSprite;
+
+        SkinsArea.DestoryChildren();
+        foreach (DeckSkinData deckSkinData in DeckSkins)
+        {
+            DeckSkinView deckSkinView = Instantiate(DeckSkinViewPrefab, SkinsArea).GetComponent<DeckSkinView>();
+            deckSkinView.DeckSkinData = deckSkinData;
+            deckSkinViews.Add(deckSkinView);
+        }
+    }
+
+    public void ApplyDeckSkin(DeckSkinData deckSkinData)
+    {
+        if (deckSkinData.Durability == 0) return;
+        deckSkinData.Durability = deckSkinData.Durability == -1 ? -1 : deckSkinData.Durability - 1;
+        CurDeckSkin = deckSkinData.DeckSkin;
+        foreach (CardView cardView in viewManager.CardToCardView.Values) cardView.GetComponent<CardSkinView>().UpdateView();
+
+        foreach (DeckSkinView deckSkinView in deckSkinViews) deckSkinView.UpdateView();
         if (CurDeckSkin) HandCover.sprite = CurDeckSkin.CoverSprite;
     }
-    /*
-    public Sprite GetNumberSprite(int i)
-    {
-        foreach (NumberSprite numberSprite in CurDeckSkin.NumberSprites)
-        {
-            if (numberSprite.Number == i) return numberSprite.Sprite;
-        }
-
-        Debug.LogError("No sprite of the number.");
-        return null;
-    }
-
-    public Sprite GetSmallSuiteSprite(Card.SuitType suitType, out bool canTint)
-    {
-        foreach (SmallSuitSprite smallSuitSprite in CurDeckSkin.SmallSuitSprites)
-        {
-            if (smallSuitSprite.Suit == suitType)
-            {
-                canTint = smallSuitSprite.CanTint;
-                return smallSuitSprite.Sprite;
-            }
-        }
-
-        Debug.LogError("No sprite of the suit.");
-        canTint = true;
-        return null;
-    }
-
-    public Sprite GetBigSuiteSprite(Card card, out bool canTint)
-    {
-        foreach (BigSuitSprite bigSuitSprite in CurDeckSkin.BigSuitSprites)
-        {
-            if ((bigSuitSprite.Suit == Card.SuitType.any || bigSuitSprite.Suit == card.Suit ) && bigSuitSprite.Number == card.Number)
-            {
-                canTint = bigSuitSprite.CanTint;
-                return bigSuitSprite.Sprite;
-            }
-        }
-
-        canTint = true;
-        return null;
-    }*/
 }
+
+
+
+[System.Serializable]
+public class DeckSkinData : SkinData
+{
+    public DeckSkin DeckSkin = null;
+}
+
+[System.Serializable]
+public class BackSkinData : SkinData
+{
+    public BackSkin BackSkin = null;
+}
+
+[System.Serializable]
+public class SkinData
+{
+    public int Durability = 0; // -1 : infinite
+    public bool IsNew = true;
+}
+

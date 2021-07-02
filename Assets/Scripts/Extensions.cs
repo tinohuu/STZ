@@ -19,4 +19,13 @@ public static class Extensions
     {
         text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
     }
+
+    public static void DestoryChildren(this Transform transform)
+    {
+        int childs = transform.childCount;
+        for (int i = childs - 1; i >= 0; i--)
+        {
+            GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
+        }
+    }
 }

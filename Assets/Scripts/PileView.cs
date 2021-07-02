@@ -26,6 +26,7 @@ public class PileView : MonoBehaviour
         for (int i = 0; i < Pile.Cards.Count; i++)
         {
             CardView cardView = Instantiate(viewManager.CardPrefab, transform).GetComponent<CardView>();
+            //cardView.GetComponent<RectTransform>().sizeDelta = new Vector3(100, 150);
             cardView.Card = Pile.Cards[i];
             viewManager.CardToCardView.Add(Pile.Cards[i], cardView);
             cardView.gameObject.SetActive(false);
