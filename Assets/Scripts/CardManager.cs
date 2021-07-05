@@ -20,8 +20,12 @@ public class CardManager : MonoBehaviour
     //public List<List<Card>> AllPiles = new List<List<Card>>(13);
 
     public List<Card> Dragged = new List<Card>();
+
+    public static CardManager Instance;
     void Awake()
     {
+        Instance = this;
+
         // Create foundations
         for (int i = 0; i < 4; i++) Foundations[i] = new Pile(Pile.PileType.foundation, new List<Card>());
 
@@ -150,6 +154,15 @@ public class CardManager : MonoBehaviour
         }
         return null;
     }
+
+    public Card SavedCardToCard(SavedCard savedCard)
+    {
+        foreach (Card card in Deck)
+        {
+            if (savedCard.Suit == card.Suit && savedCard.Number == card.Number) return card;
+        }
+        return null;
+    }
 }
 
 [System.Serializable]
@@ -170,6 +183,21 @@ public class Card
     public Color Color
     {
         get { return (Suit == SuitType.heart || Suit == SuitType.diamond) ? Color.red : Color.black; }
+    }
+}
+
+[System.Serializable]
+public struct SavedCard
+{
+    public Card.SuitType Suit;
+    public int Number;
+    public bool IsFaceUp;
+
+    public SavedCard(Card.SuitType suitType, int number, bool isUp = false)
+    {
+        Suit = suitType;
+        Number = number;
+        IsFaceUp = isUp;
     }
 }
 

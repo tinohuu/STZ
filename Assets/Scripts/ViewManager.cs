@@ -221,7 +221,7 @@ public class ViewManager : MonoBehaviour
         Card card = DraggedCardViews[0].Card;
         int index = DraggedFrom.Pile.Cards.IndexOf(card);
         bool isLastCardUp = index != 0 && DraggedFrom.Pile.Cards[index - 1].IsFaceUp;
-        Undo undo = new Undo(DraggedCardViews[0].Card, cardManager.AllPiles.IndexOf(DraggedFrom.Pile), cardManager.AllPiles.IndexOf(newPile.Pile), isLastCardUp);
+        Undo undo = new Undo(DraggedFrom.Pile, newPile.Pile);
         undoManager.Undos.Add(undo);
 
         for (int j = 0; j < DraggedCardViews.Count; j++)
@@ -273,7 +273,7 @@ public class ViewManager : MonoBehaviour
     {
         foreach (CardView cardView in CardToCardView.Values)
         {
-            if (cardView.IsAnimating) return true;
+            if (cardView.gameObject.activeSelf && cardView.IsAnimating) return true;
         }
         return false;
     }

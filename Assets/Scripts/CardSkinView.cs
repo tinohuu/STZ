@@ -7,25 +7,37 @@ using UnityEngine.UI;
 public class CardSkinView : MonoBehaviour
 {
     public DeckSkin PreviewSkin = null;
-
     SkinManager skinManager;
-    CardView cardView;
+    CardView cardView = null;
     private void Awake()
     {
         skinManager = FindObjectOfType<SkinManager>();
         cardView = GetComponent<CardView>();
+        if (cardView)
+        {
+            cardView.UpdateViewDelegate += new CardView.UpdateView(UpdateView);
+            cardView.UpdateViewDelegate += new CardView.UpdateView(UpdateBack);
+        }
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdateView();
+        if (cardView) cardView.UpdateViewDelegate -= new CardView.UpdateView(UpdateView);
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
 
+    void UpdateBack()
+    {
+        if (cardView.PileView && cardView.PileView.Pile.Type == Pile.PileType.hand && cardView.Card == cardView.PileView.Pile.Cards.Last())
+            cardView.Back.sprite = skinManager.CurDeckSkin.CoverSprite;
+        else
+            cardView.Back.sprite = skinManager.CurDeckSkin.BackSprite;
     }
 
     public void UpdateView()

@@ -34,7 +34,10 @@ public class GameManager : MonoBehaviour
             _score = value < 0 ? 0 : value;
         }
     }
-
+    public void SetDrawCards(int number)
+    {
+        DrawCards = number;
+    }
     public void StartCountTime()
     {
         if (InitialTime == -1) InitialTime = Time.time;

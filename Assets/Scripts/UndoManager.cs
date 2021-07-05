@@ -28,6 +28,7 @@ public class UndoManager : MonoBehaviour
 
     public void Undo()
     {
+        /*
         if (viewManager.IsAnyCardAnimating() || Undos.Count == 0) return;
 
         Pile oriPile = cardManager.AllPiles[Undos.Last().OriPileIndex];
@@ -99,10 +100,25 @@ public class UndoManager : MonoBehaviour
             //cardView.SetOriViewPosData(newPositions[i]);
             //Sphere.transform.position = newPositions[i];
         }
-
+        */
         //Debug.LogWarning("Test4");
-        oriPileView.UpdatePileView();
-        curPileView.UpdatePileView();
+        Undos.Last().FromPile.Cards.Clear();
+        foreach (SavedCard savedCard in Undos.Last().FromPileCards)
+        {
+            Card card = cardManager.SavedCardToCard(savedCard);
+            card.IsFaceUp = savedCard.IsFaceUp;
+            Undos.Last().FromPile.Cards.Add(card);
+        }
+        Undos.Last().ToPile.Cards.Clear();
+        foreach (SavedCard savedCard in Undos.Last().ToPileCards)
+        {
+            Card card = cardManager.SavedCardToCard(savedCard);
+            card.IsFaceUp = savedCard.IsFaceUp;
+            Undos.Last().ToPile.Cards.Add(card);
+        }
+
+        viewManager.PileToPileView[Undos.Last().ToPile].UpdatePileView();
+        viewManager.PileToPileView[Undos.Last().FromPile].UpdatePileView();
         Undos.RemoveAt(Undos.Count - 1);
         FindObjectOfType<GameManager>().Moves++;
     }
@@ -111,6 +127,14 @@ public class UndoManager : MonoBehaviour
 [System.Serializable]
 public struct Undo
 {
+
+
+    public Pile FromPile;
+    public Pile ToPile;
+    public List<SavedCard> FromPileCards;
+    public List<SavedCard> ToPileCards;
+
+    /*
     public int OriPileIndex;
     public int CurPileIndex;
     public bool IsLastCardUp;
@@ -125,5 +149,23 @@ public struct Undo
         IsLastCardUp = isLastCardUp;
         OldPiles = oldPiles;
         IsHandCard = isHandCard;
+    }*/
+
+    public Undo(Pile fromPile, Pile toPile)
+    {
+        FromPile = fromPile;
+        ToPile = toPile;
+
+        FromPileCards = new List<SavedCard>();
+        foreach (Card card in FromPile.Cards) FromPileCards.Add(new SavedCard(card.Suit, card.Number, card.IsFaceUp));
+        ToPileCards = new List<SavedCard>();
+        foreach (Card card in ToPile.Cards) ToPileCards.Add(new SavedCard(card.Suit, card.Number, card.IsFaceUp));
     }
+}
+
+public struct UndoCard
+{
+    public Card.SuitType Suit;
+    public int Number;
+    public bool IsFaceUp;
 }

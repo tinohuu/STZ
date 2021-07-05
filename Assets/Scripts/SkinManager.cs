@@ -5,26 +5,53 @@ using UnityEngine.UI;
 
 public class SkinManager : MonoBehaviour
 {
-    public DeckSkin CurDeckSkin = null;
-    public Image HandCover = null;
+    [Header("Configuration")]
     public List<DeckSkinData> DeckSkins = new List<DeckSkinData>();
     public List<BackSkinData> BackSkins = new List<BackSkinData>();
-    public Transform SkinsArea;
+    [Header("References")]
+    public Image HandCover = null;
+    public Image BackgroundMain = null;
+    public Image BackgroundSecondary = null;
+    public Transform DeckSkinsArea;
+    public Transform BackSkinsArea;
     public GameObject DeckSkinViewPrefab;
+    public GameObject BackSkinViewPrefab;
+    public GameObject Preview;
+    public Image PreviewBack;
+    public Text PreviewBackName;
+    [Header("Inspected")]
+    public DeckSkin CurDeckSkin = null;
+    public BackSkin CurBackSkin = null;
+
     List<DeckSkinView> deckSkinViews = new List<DeckSkinView>();
+    List<BackSkinView> backSkinViews = new List<BackSkinView>();
     ViewManager viewManager;
     private void Start()
     {
         viewManager = FindObjectOfType<ViewManager>();
         if (CurDeckSkin) HandCover.sprite = CurDeckSkin.CoverSprite;
 
-        SkinsArea.DestoryChildren();
+        // Create deck skin UI slots
+        DeckSkinsArea.DestoryChildren();
         foreach (DeckSkinData deckSkinData in DeckSkins)
         {
-            DeckSkinView deckSkinView = Instantiate(DeckSkinViewPrefab, SkinsArea).GetComponent<DeckSkinView>();
+            DeckSkinView deckSkinView = Instantiate(DeckSkinViewPrefab, DeckSkinsArea).GetComponent<DeckSkinView>();
             deckSkinView.DeckSkinData = deckSkinData;
             deckSkinViews.Add(deckSkinView);
         }
+
+        // Create back skin UI slots
+        BackSkinsArea.DestoryChildren();
+        foreach (BackSkinData backSkinData in BackSkins)
+        {
+            Debug.Log("Create back skin slots.");
+            BackSkinView backSkinView = Instantiate(BackSkinViewPrefab, BackSkinsArea).GetComponent<BackSkinView>();
+            backSkinView.BackSkinData = backSkinData;
+            backSkinViews.Add(backSkinView);
+        }
+
+        //ApplyDeckSkin(DeckSkins[0]);
+        //ApplyBackSkin(BackSkins[0]);
     }
 
     public void ApplyDeckSkin(DeckSkinData deckSkinData)
@@ -36,6 +63,34 @@ public class SkinManager : MonoBehaviour
 
         foreach (DeckSkinView deckSkinView in deckSkinViews) deckSkinView.UpdateView();
         if (CurDeckSkin) HandCover.sprite = CurDeckSkin.CoverSprite;
+    }
+
+    public void ApplyBackSkin(BackSkinData backSkinData)
+    {
+        if (backSkinData.Durability == 0) return;
+        backSkinData.Durability = backSkinData.Durability == -1 ? -1 : backSkinData.Durability - 1;
+        CurBackSkin = backSkinData.BackSkin;
+
+        BackgroundMain.sprite = backSkinData.BackSkin.Main;
+        BackgroundMain.color = backSkinData.BackSkin.Tint;
+        BackgroundSecondary.sprite = backSkinData.BackSkin.Secondary;
+        BackgroundSecondary.gameObject.SetActive(BackgroundSecondary.sprite);
+        //foreach (CardView cardView in viewManager.CardToCardView.Values) cardView.GetComponent<CardSkinView>().UpdateView();
+
+        foreach (BackSkinView backSkinView in backSkinViews) backSkinView.UpdateView();
+        //if (CurDeckSkin) HandCover.sprite = CurDeckSkin.CoverSprite;
+    }
+
+    public void PreviewBackSkin(BackSkinData backSkinData)
+    {
+        Preview.SetActive(true);
+        // Update the skin of preview cards
+        CardSkinView[] cardSkinViews = Preview.GetComponentsInChildren<CardSkinView>();
+        foreach (CardSkinView cardSkinView in cardSkinViews) cardSkinView.UpdateView();
+        // Update preview background
+        PreviewBack.sprite = backSkinData.BackSkin.Main;
+        PreviewBack.color = backSkinData.BackSkin.Tint;
+        PreviewBackName.text = backSkinData.BackSkin.Name;
     }
 }
 

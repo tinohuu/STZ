@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -28,10 +29,11 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     public float FlipAnimTimer = -1;
     public Vector3? AnimStartPos = null;
     public float AnimStartTime = 0;
-
     public bool IsAnimating { get { return isAnimatingMove; } }
     public bool isAnimatingMove = false;
 
+    public delegate void UpdateView();
+    public event UpdateView UpdateViewDelegate = null;
     public Vector2 oriSize;
     GameManager gameManager;
     Canvas canvas = null;
@@ -67,6 +69,11 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         if (Back.color.a == 0) Alpha = 1;
     }
 
+    private void OnEnable()
+    {
+
+    }
+
     public void OnBeginDrag(PointerEventData data)
     {
         if (!Card.IsFaceUp || IsHint || !PileView) return;
@@ -99,8 +106,6 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     }
     public void UpdateCardView(Vector3? animStartPos = null, float animPauseTime = 0)
     {
-
-
         Highlight.gameObject.SetActive(IsHint);
 
         if (animStartPos != null)
@@ -125,8 +130,9 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         //rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(100, 150) : new Vector2(100, 150);
         //Image.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 150);
         ///Image.GetComponent<RectTransform>().anchoredPosition = new Vector2(999, 999);
-
         Alpha = 0;
+
+        if (UpdateViewDelegate != null) UpdateViewDelegate.Invoke();
     }
 
     /*public void CardToPileView(PileView pileView)

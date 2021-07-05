@@ -42,9 +42,19 @@ public class PileView : MonoBehaviour
             cardView.Alpha = 0;
             cardView.transform.SetParent(transform);
             cardView.transform.SetAsLastSibling();
-            cardView.gameObject.SetActive(true);
+            if (Pile.Type == Pile.PileType.talon)
+            {
+                cardView.gameObject.SetActive(Pile.Cards.IndexOf(card) >= Pile.Cards.Count - gameManager.DrawCards);
+            }
+            else if (Pile.Type == Pile.PileType.foundation)
+                cardView.gameObject.SetActive(Pile.Cards.IndexOf(card) >= Pile.Cards.Count - 2);
+            //else if (Pile.Type == Pile.PileType.hand)
+            //    cardView.gameObject.SetActive(Pile.Cards.IndexOf(card) >= Pile.Cards.Count - 2);
+            else cardView.gameObject.SetActive(true);
             cardView.UpdateCardView(cardView.Image.transform.position);
         }
+        //StopAllCoroutines();
+        //StartCoroutine(DisableUnseenCards());
         //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
         /*DestroyChildren();
         // Get viewable cards count
@@ -62,5 +72,22 @@ public class PileView : MonoBehaviour
             cardView.UpdateCardView();
             CardViews.Add(cardView);
         }*/
+    }
+
+    IEnumerator DisableUnseenCards()
+    {
+        yield return new WaitForSeconds(2);
+        foreach (Card card in Pile.Cards)
+        {
+            CardView cardView = viewManager.CardToCardView[card];
+            cardView.Alpha = 0;
+            cardView.transform.SetParent(transform);
+            cardView.transform.SetAsLastSibling();
+            if (Pile.Type == Pile.PileType.foundation || Pile.Type == Pile.PileType.hand || Pile.Type == Pile.PileType.talon)
+                cardView.gameObject.SetActive(Pile.Cards.IndexOf(card) == Pile.Cards.Count - 1 || Pile.Cards.IndexOf(card) == Pile.Cards.Count - 2 || Pile.Cards.IndexOf(card) == Pile.Cards.Count - 3);
+            else
+                cardView.gameObject.SetActive(true);
+            cardView.UpdateCardView(cardView.Image.transform.position);
+        }
     }
 }
