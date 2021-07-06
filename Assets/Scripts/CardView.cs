@@ -68,10 +68,10 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         Animate();
         if (Back.color.a == 0) Alpha = 1;
     }
-
-    private void OnEnable()
+    private void OnDisable()
     {
-
+        Image.transform.localPosition = Vector3.zero;
+        Image.transform.localRotation = Quaternion.identity;
     }
 
     public void OnBeginDrag(PointerEventData data)
@@ -108,6 +108,8 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     {
         Highlight.gameObject.SetActive(IsHint);
 
+        if (Vector3.Distance(Image.transform.position, transform.position) > 0.1f) Alpha = 0;
+
         if (animStartPos != null)
         {
             AnimStartPos = animStartPos;
@@ -118,6 +120,11 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         {
             rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(oriSize.x, oriSize.y / 3) : new Vector2(oriSize.x, oriSize.y / 8);
             //Image.GetComponent<RectTransform>().anchoredPosition = new Vector2(-25, -75);
+        }
+        else if (PileView && PileView.Pile.Type == Pile.PileType.talon)
+        {
+            if (PileView.Pile.Cards.IndexOf(Card) < PileView.Pile.Cards.Count - gameManager.SettingsData.DrawCards) rectTransform.sizeDelta = new Vector2(0, oriSize.y);
+            else rectTransform.sizeDelta = rectTransform.sizeDelta = oriSize;
         }
         else
         {
@@ -130,7 +137,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         //rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(100, 150) : new Vector2(100, 150);
         //Image.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 150);
         ///Image.GetComponent<RectTransform>().anchoredPosition = new Vector2(999, 999);
-        Alpha = 0;
+
 
         if (UpdateViewDelegate != null) UpdateViewDelegate.Invoke();
     }
@@ -145,12 +152,12 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     {
         if (Card.IsFaceUp && FlipAnimTimer <= 1)
         {
-            FlipAnimTimer += Time.deltaTime * gameManager.AnimationSpeed / 2;
+            FlipAnimTimer += Time.deltaTime * gameManager.SettingsData.AnimationSpeed / 2;
         }
 
         if (!Card.IsFaceUp && FlipAnimTimer >= -1)
         {
-            FlipAnimTimer -= Time.deltaTime * gameManager.AnimationSpeed/ 2;
+            FlipAnimTimer -= Time.deltaTime * gameManager.SettingsData.AnimationSpeed / 2;
         }
         Face.transform.localScale = new Vector3(Mathf.Clamp(FlipAnimTimer, 0, 1), 1, 1);
         Back.transform.localScale = new Vector3(Mathf.Clamp(-FlipAnimTimer, 0, 1), 1, 1);
@@ -164,13 +171,18 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
             //Image.gameObject.SetActive(true);
             isAnimatingMove = true;
             AnimStartPos = null;
+            //OverrideSorting(true, 1);
             //Alpha = 1;
         }
 
         if (isAnimatingMove && Time.time >= AnimStartTime)
         {
-            if (IsHint) Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * gameManager.AnimationSpeed / 2);
-            else Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * gameManager.AnimationSpeed);
+            if (IsHint)
+            {
+                Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * gameManager.SettingsData.AnimationSpeed / 2);
+                Alpha = Mathf.Clamp(Vector3.Distance(Image.transform.position, transform.position) / 10, 0, 1);
+            }
+            else Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * gameManager.SettingsData.AnimationSpeed);
 
             if (Vector3.Distance(Image.transform.position, transform.position) < 1f)
             {

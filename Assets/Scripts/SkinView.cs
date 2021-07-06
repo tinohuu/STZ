@@ -17,7 +17,11 @@ public class SkinView : MonoBehaviour
         skinManager = FindObjectOfType<SkinManager>();
         UpdateView();
     }
-
+    private void OnEnable()
+    {
+        skinManager = FindObjectOfType<SkinManager>();
+        UpdateView();
+    }
     public virtual void Use()
     {
 

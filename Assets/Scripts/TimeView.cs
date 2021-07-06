@@ -13,15 +13,15 @@ public class TimeView : MonoBehaviour
     }
     void Update()
     {
-        if (gameManager.InitialTime >= 0)
+        if (gameManager.Time >= 0)
         {
-            if (Time.time - gameManager.InitialTime >= NextTimeScore)
+            if (Time.time - gameManager.Time >= NextTimeScore)
             {
                 gameManager.Score -= 5;
                 NextTimeScore += 30;
             }
 
-            float gameTime = Time.time - gameManager.InitialTime;
+            float gameTime = Time.time - gameManager.Time;
             int minute = (int)gameTime / 60;
             string minuteText = minute >= 10 ? minute.ToString() : "0" + minute;
             int second = (int)gameTime % 60;

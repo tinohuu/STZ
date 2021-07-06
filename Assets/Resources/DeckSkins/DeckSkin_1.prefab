@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3525777332087888429}
   - component: {fileID: -321260583282287450}
   m_Layer: 0
-  m_Name: DeckSkin_1_Dublin
+  m_Name: DeckSkin_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

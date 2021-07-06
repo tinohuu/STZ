@@ -20,13 +20,13 @@ public class DeckSkinView : SkinView
     {
         Durability.text = "Durability: " + DeckSkinData.Durability;
         New.SetActive(DeckSkinData.IsNew);
-        Box.sprite = DeckSkinData.DeckSkin.BoxSprite;
+        Box.sprite = skinManager.DeckSkins[DeckSkinData.Id].BoxSprite;
         foreach (CardSkinView cardSkinView in PreviewCards)
         {
-            cardSkinView.PreviewSkin = DeckSkinData.DeckSkin;
+            cardSkinView.PreviewSkin = skinManager.DeckSkins[DeckSkinData.Id];
             cardSkinView.UpdateView();
         }
-        UseButton.interactable = skinManager.CurDeckSkin != DeckSkinData.DeckSkin;
+        UseButton.interactable = skinManager.CurDeckSkin != skinManager.DeckSkins[DeckSkinData.Id];
         UseText.SetActive(UseButton.interactable);
         InUseText.SetActive(!UseButton.interactable);
     }

@@ -29,9 +29,9 @@ public class BackSkinView : SkinView
             cardSkinView.PreviewSkin = BackSkinData.DeckSkin;
             cardSkinView.UpdateView();
         }*/
-        BackSlotImage.sprite = BackSkinData.BackSkin.Main;
-        BackSlotImage.color = BackSkinData.BackSkin.Tint;
-        UseButton.interactable = skinManager.CurBackSkin != BackSkinData.BackSkin;
+        BackSlotImage.sprite = skinManager.BackSkins[BackSkinData.Id].Main;
+        BackSlotImage.color = skinManager.BackSkins[BackSkinData.Id].Tint;
+        UseButton.interactable = skinManager.CurBackSkin != skinManager.BackSkins[BackSkinData.Id];
         UseText.SetActive(UseButton.interactable);
         InUseText.SetActive(!UseButton.interactable);
     }

@@ -18,7 +18,6 @@ public class CardSkinView : MonoBehaviour
             cardView.UpdateViewDelegate += new CardView.UpdateView(UpdateView);
             cardView.UpdateViewDelegate += new CardView.UpdateView(UpdateBack);
         }
-
     }
 
     // Start is called before the first frame update
@@ -44,7 +43,7 @@ public class CardSkinView : MonoBehaviour
     {
         DeckSkin deckSkin = PreviewSkin ? PreviewSkin : skinManager.CurDeckSkin;
         // Display by image
-        if (deckSkin)
+        if (deckSkin && cardView)
         {
             /*bool isRed = Card.Color == Color.red;
             NumberImage.sprite = skinManager.GetNumberSprite(Card.Number);
@@ -82,6 +81,7 @@ public class CardSkinView : MonoBehaviour
             cardView.Face.sprite = deckSkin.FaceSprite;
 
             cardView.Alpha = 0;
+            UpdateBack();
         }
     }
 }

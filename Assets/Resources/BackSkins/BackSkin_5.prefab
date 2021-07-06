@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5686479970912706451}
   - component: {fileID: -314760059577169162}
   m_Layer: 0
-  m_Name: BackSkin_6_CloudGarden
+  m_Name: BackSkin_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac31b9886e2826e4d89cd3fda646403b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 6
-  Name: Cloud Garden
-  Main: {fileID: 21300000, guid: 475e5d6bcc409e1499f1ea4002ac2555, type: 3}
+  Id: 5
+  Name: Rainbow City
+  Main: {fileID: 21300000, guid: 5128358b57077aa409b3d7b05940b3be, type: 3}
   Secondary: {fileID: 0}
   Tint: {r: 1, g: 1, b: 1, a: 1}

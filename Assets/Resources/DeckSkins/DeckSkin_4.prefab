@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3525777332087888429}
   - component: {fileID: -321260583282287450}
   m_Layer: 0
-  m_Name: DeckSkin_4_Firenze
+  m_Name: DeckSkin_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 4
-  Name: Firenze
+  Name: Constantinople
   BoxSprite: {fileID: 21300000, guid: 5f10869beb708154b95c5707d1d399fb, type: 3}
   FaceSprite: {fileID: 21300000, guid: f553b2ca2369e4b4e855ac1a7a8d989d, type: 3}
   BackSprite: {fileID: 21300000, guid: bd704a133677c404480f76d6a41bc769, type: 3}

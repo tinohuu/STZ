@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5686479970912706451}
   - component: {fileID: -314760059577169162}
   m_Layer: 0
-  m_Name: BackSkin_3_ParisianDawn
+  m_Name: BackSkin_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

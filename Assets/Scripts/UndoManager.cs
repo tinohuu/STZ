@@ -128,9 +128,9 @@ public class UndoManager : MonoBehaviour
 public struct Undo
 {
 
-
-    public Pile FromPile;
-    public Pile ToPile;
+    public int FromPileIndex;
+    public int ToPileIndex;
+    //public Pile ToPile;
     public List<SavedCard> FromPileCards;
     public List<SavedCard> ToPileCards;
 
@@ -153,16 +153,20 @@ public struct Undo
 
     public Undo(Pile fromPile, Pile toPile)
     {
-        FromPile = fromPile;
-        ToPile = toPile;
+        FromPileIndex = CardManager.Instance.AllPiles.IndexOf(fromPile);
+        ToPileIndex = CardManager.Instance.AllPiles.IndexOf(toPile);
 
         FromPileCards = new List<SavedCard>();
-        foreach (Card card in FromPile.Cards) FromPileCards.Add(new SavedCard(card.Suit, card.Number, card.IsFaceUp));
+        foreach (Card card in CardManager.Instance.AllPiles[FromPileIndex].Cards) FromPileCards.Add(new SavedCard(card.Suit, card.Number, card.IsFaceUp));
         ToPileCards = new List<SavedCard>();
-        foreach (Card card in ToPile.Cards) ToPileCards.Add(new SavedCard(card.Suit, card.Number, card.IsFaceUp));
+        foreach (Card card in CardManager.Instance.AllPiles[ToPileIndex].Cards) ToPileCards.Add(new SavedCard(card.Suit, card.Number, card.IsFaceUp));
     }
+
+    public Pile FromPile { get => CardManager.Instance.AllPiles[FromPileIndex]; }
+    public Pile ToPile { get => CardManager.Instance.AllPiles[ToPileIndex]; }
 }
 
+[System.Serializable]
 public struct UndoCard
 {
     public Card.SuitType Suit;

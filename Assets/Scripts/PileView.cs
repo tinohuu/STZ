@@ -36,15 +36,21 @@ public class PileView : MonoBehaviour
 
     public void UpdatePileView()
     {
+        if (Pile.Type == Pile.PileType.talon)
+        {
+            HorizontalLayoutGroup layout = GetComponent<HorizontalLayoutGroup>();
+            layout.padding.left = Pile.Cards.Count > gameManager.SettingsData.DrawCards ? 50 : 0;
+        }
+
         foreach (Card card in Pile.Cards)
         {
             CardView cardView = viewManager.CardToCardView[card];
-            cardView.Alpha = 0;
+            //cardView.Alpha = 0;
             cardView.transform.SetParent(transform);
             cardView.transform.SetAsLastSibling();
             if (Pile.Type == Pile.PileType.talon)
             {
-                cardView.gameObject.SetActive(Pile.Cards.IndexOf(card) >= Pile.Cards.Count - gameManager.DrawCards);
+                cardView.gameObject.SetActive(Pile.Cards.IndexOf(card) >= Pile.Cards.Count - gameManager.SettingsData.DrawCards - 1);
             }
             else if (Pile.Type == Pile.PileType.foundation)
                 cardView.gameObject.SetActive(Pile.Cards.IndexOf(card) >= Pile.Cards.Count - 2);
@@ -53,6 +59,10 @@ public class PileView : MonoBehaviour
             else cardView.gameObject.SetActive(true);
             cardView.UpdateCardView(cardView.Image.transform.position);
         }
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+
+
         //StopAllCoroutines();
         //StartCoroutine(DisableUnseenCards());
         //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());

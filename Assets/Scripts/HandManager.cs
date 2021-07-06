@@ -56,21 +56,23 @@ public class HandManager: MonoBehaviour
         // Deal hand to talon
         else
         {
-            gameManager.Moves++;
+            if (cardManager.Hand.Cards.Count == 0 && cardManager.Talon.Cards.Count > 1) return;
 
             Undo undo = new Undo(cardManager.Hand, cardManager.Talon);
             FindObjectOfType<UndoManager>().Undos.Add(undo);
 
-            for (int i = 0; i < gameManager.DrawCards; i++)
+            for (int i = 0; i < gameManager.SettingsData.DrawCards; i++)
             {
-                if (i >= cardManager.Hand.Cards.Count) break;
-                cardManager.Hand.Cards[i].IsFaceUp = true;
-                cardManager.UpdateData(cardManager.Hand.Cards[i], cardManager.Hand, cardManager.Talon);
+                if (cardManager.Hand.Cards.Count == 0) break;
+                cardManager.Hand.Cards[0].IsFaceUp = true;
+                cardManager.UpdateData(cardManager.Hand.Cards[0], cardManager.Hand, cardManager.Talon);
 
             }
 
             viewManager.TalonView.UpdatePileView();
             viewManager.HandView.UpdatePileView();
+
+            gameManager.Moves++;
         }
     }
 }

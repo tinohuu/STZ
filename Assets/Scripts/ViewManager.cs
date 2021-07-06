@@ -2,26 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ViewManager : MonoBehaviour
 {
+    [Header("References")]
     public Transform TableauArea;
     public Transform FoundationArea;
-    //GameObject CardPrefab;
+    public HorizontalLayoutGroup TopLayoutGroup;
+    public HorizontalLayoutGroup TableauLayoutGroup;
+
     public GameObject PilePrefab;
     public GameObject CardPrefab;
+    public GameObject AutoWinButton;
+    public GameObject Win;
+
+    [Header("Data")]
     public List<PileView> TableauViews;
     public List<PileView> FoundationViews;
     public PileView HandView;
     public PileView TalonView;
+    public List<CardView> DraggedCardViews = new List<CardView>();
 
-    //public List<CardView> TempCardViews = new List<CardView>();
     CardManager cardManager;
     UndoManager undoManager;
     GameManager gameManager;
     PileView DraggedFrom;
-    public List<CardView> DraggedCardViews = new List<CardView>();
+    bool isAutoWinning = false;
+
     public Dictionary<Card, CardView> CardToCardView = new Dictionary<Card, CardView>();
     public Dictionary<Pile, PileView> PileToPileView = new Dictionary<Pile, PileView>();
     private void Awake()
@@ -62,17 +71,21 @@ public class ViewManager : MonoBehaviour
         HandView.CreateCardViews();
         HandView.UpdatePileView();
         PileToPileView.Add(cardManager.Hand, HandView);
+
+        gameManager.OnMove += new GameManager.MovesHandler(ShowAutoWin);
     }
-
-
     void Update()
     {
         Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
         if (!screenRect.Contains(Input.mousePosition) || Input.GetMouseButtonUp(0)) OnPileEndDrag();
+
+        Debug.Log("PileViewCount " + PileToPileView.Count);
+
+        
     }
     public void OnBeginDragCard(Card card)
     {
-        if (IsAnyCardAnimating()) return;
+        if (IsAnyCardAnimating() || isAutoWinning) return;
 
         if (DraggedCardViews.Count > 0 && DraggedCardViews[0] )
         {
@@ -88,7 +101,7 @@ public class ViewManager : MonoBehaviour
         {
             CardView cardView = CardToCardView[DraggedFrom.Pile.Cards[i]];
             DraggedCardViews.Add(cardView);
-            cardView.OverrideSorting(true, i);
+            cardView.OverrideSorting(true, i + 1);
         }
     }
     public void OnPileDrag(Vector3 pos)
@@ -109,7 +122,6 @@ public class ViewManager : MonoBehaviour
             }
         }
     }
-
     public void OnPileEndDrag()
     {
         if (DraggedCardViews.Count == 0 || !DraggedCardViews[0]) return;
@@ -147,7 +159,7 @@ public class ViewManager : MonoBehaviour
         {
             if (TableauViews[i].Pile.Cards.Count == 0)
             {
-                if (DraggedCardViews[0].Card.Number == 13)
+                if (DraggedCardViews[0].Card.Number == 13 || gameManager.IsAnyToEmptyPile)
                 {
                     AlternativePileViews.Add(TableauViews[i]);
                     //DragToNew(PileViews[i]);
@@ -210,13 +222,11 @@ public class ViewManager : MonoBehaviour
         DraggedFrom.UpdatePileView();
         DraggedCardViews.Clear();
     }
-
     void DragToNew(PileView newPile)
     {
         // Start to count game time
-        if (gameManager.InitialTime == -1) gameManager.InitialTime = Time.time;
-        // Count moves
-        gameManager.Moves++;
+        if (gameManager.Time == -1) gameManager.Time = Time.time;
+
 
         Card card = DraggedCardViews[0].Card;
         int index = DraggedFrom.Pile.Cards.IndexOf(card);
@@ -239,23 +249,15 @@ public class ViewManager : MonoBehaviour
         DraggedFrom.UpdatePileView();
         newPile.UpdatePileView();
         DraggedCardViews.Clear();
+
+        // Count moves
+        gameManager.Moves++;
     }
 
-    /*public PileView PileToPileView(Pile pile)
+    public void ShowAutoWin()
     {
-        if (TalonView.Pile == pile) return TalonView;
-        if (HandView.Pile == pile) return HandView;
-        foreach (PileView pileView in TableauViews)
-        {
-            if (pileView.Pile == pile) return pileView;
-        }
-        foreach (PileView pileView in FoundationViews)
-        {
-            if (pileView.Pile == pile) return pileView;
-        }
-        return null;
-    }*/
-
+        if (cardManager.IsAllFaceUp && !isAutoWinning) AutoWinButton.SetActive(true);
+    }
     public void Shuffle()
     {
         if (cardManager.Hand.Cards.Count + cardManager.Talon.Cards.Count == 0)
@@ -268,7 +270,6 @@ public class ViewManager : MonoBehaviour
         undoManager.Undos.Clear();
         FindObjectOfType<HandManager>().OnPointerClick();
     }
-
     public bool IsAnyCardAnimating()
     {
         foreach (CardView cardView in CardToCardView.Values)
@@ -276,5 +277,76 @@ public class ViewManager : MonoBehaviour
             if (cardView.gameObject.activeSelf && cardView.IsAnimating) return true;
         }
         return false;
+    }
+    public void SetRightHand(bool isRightHand)
+    {
+        GameManager.Instance.SettingsData.IsRightHand = isRightHand;
+        TopLayoutGroup.reverseArrangement = !isRightHand;
+        TableauLayoutGroup.reverseArrangement = !isRightHand;
+    }
+
+    public void AutoWin()
+    {
+        AutoWinButton.SetActive(false);
+        isAutoWinning = true;
+        undoManager.Undos.Clear();
+        StartCoroutine(AnimateAutoWin());
+    }
+    IEnumerator AnimateAutoWin()
+    {
+        List<Pile> piles = new List<Pile>();
+        piles.AddRange(cardManager.Tableau);
+        piles.Add(cardManager.Talon);
+        piles.Add(cardManager.Hand);
+
+        for (int i = 0; i < piles.Count; i++)
+        {
+            if (piles[i].Cards.Count != 0)
+            {
+                Card card = null;
+                Pile newPile = null;
+
+                if (piles[i].Type == Pile.PileType.tableau)
+                {
+                    card = piles[i].Cards.Last();
+                    newPile = cardManager.GetFoundationDest(card, piles[i]);
+                }
+                else
+                {
+                    foreach (Card c in piles[i].Cards)
+                    {
+                        card = c;
+                        newPile = cardManager.GetFoundationDest(c, piles[i]);
+                        if (newPile != null) break;
+                    }
+                }
+
+                if (newPile != null)
+                {
+                    Debug.Log("Card " + card.Suit + card.Number + " matches Pile " + newPile);
+                    cardManager.UpdateData(card, piles[i], newPile);
+                    if (piles[i].Type == Pile.PileType.hand) card.IsFaceUp = true;
+                    Debug.Log("PileViewCount " + PileToPileView.Count);
+                    foreach (PileView pileView in PileToPileView.Values) Debug.Log(pileView.name + pileView.Pile.Type);
+                    PileToPileView[piles[i]].UpdatePileView();
+                    PileToPileView[newPile].UpdatePileView();
+                    float pauseTime = Vector3.Distance(CardToCardView[card].transform.position, PileToPileView[newPile].transform.position) / gameManager.SettingsData.AnimationSpeed * 0.01f;
+                    yield return new WaitForSeconds(Vector3.Distance(CardToCardView[card].transform.position, PileToPileView[newPile].transform.position) / gameManager.SettingsData.AnimationSpeed * 0.01F);
+                    Debug.Log("Wait for " + pauseTime);
+                }
+            }
+
+            if (i == piles.Count - 1)
+            {
+                int cardCount = 0;
+                foreach (Pile pile in piles) cardCount += pile.Cards.Count;
+                if (cardCount > 0) i = -1;
+            }
+
+        }
+
+        Debug.Log("Win");
+        Win.SetActive(true);
+        yield return null;
     }
 }
