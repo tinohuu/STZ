@@ -18,7 +18,7 @@ public class DeckSkinView : SkinView
 
     public override void UpdateView()
     {
-        Durability.text = "Durability: " + DeckSkinData.Durability;
+        Durability.text = "Durability: " + (DeckSkinData.Durability == -1 ? "¡Þ" : DeckSkinData.Durability.ToString());
         New.SetActive(DeckSkinData.IsNew);
         Box.sprite = skinManager.DeckSkins[DeckSkinData.Id].BoxSprite;
         foreach (CardSkinView cardSkinView in PreviewCards)

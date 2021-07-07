@@ -4,35 +4,29 @@ using UnityEngine;
 
 public class SettingsViewManager : MonoBehaviour
 {
-    public Setting Expand = null;
-    public Setting DrawCards = null;
-    public Setting RightHand = null;
-    public Setting Info = null;
-    public Setting AnimSpeed = null;
-    public Setting Volume = null;
+    public SettingView Expand = null;
+    public SettingView DrawCards = null;
+    public SettingView RightHand = null;
+    public SettingView Info = null;
+    public SettingView AnimSpeed = null;
+    public SettingView Volume = null;
     public static SettingsViewManager Instance;
     private void Awake()
     {
         Instance = this;
         if (GameManager.Instance.SettingsData != null)
         {
-            Expand.ButtonData = GameManager.Instance.SettingsData.IsEoExpanded;
+            Expand.SwapData = GameManager.Instance.SettingsData.IsEoExpanded;
             DrawCards.ToggleData = GameManager.Instance.SettingsData.DrawCards == 3;
             RightHand.ToggleData = GameManager.Instance.SettingsData.IsRightHand;
-            Info.ToggleData = GameManager.Instance.SettingsData.Info;
-            //Volume.ButtonData = GameManager.Instance.SettingsData.Volume;
-            AnimSpeed.BarData = Mathf.Clamp((int)GameManager.Instance.SettingsData.AnimationSpeed / 10, 0, 2);
+            Info.ToggleData = GameManager.Instance.SettingsData.ShowInfo;
+            Volume.SwapData = GameManager.Instance.SettingsData.IsMuted;
+            AnimSpeed.MultipleData = GameManager.Instance.SettingsData.AnimationSpeed < 20 ? 0 : (GameManager.Instance.SettingsData.AnimationSpeed < 40? 1 : 2); 
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Expand.ButtonData = true;
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void SetAnimSpeed(int speed)
     {
-        
+        GameManager.Instance.SettingsData.AnimationSpeed = speed;
     }
 }

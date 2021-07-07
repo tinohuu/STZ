@@ -55,10 +55,11 @@ public class SkinManager : MonoBehaviour
 
         if (GameManager.Instance.Save == null)
         {
+
             foreach (DeckSkin deckSkin in DeckSkins) DeckSkinDatas.Add(new DeckSkinData(deckSkin.Id, 10, true));
             foreach (BackSkin backSkin in BackSkins) BackSkinDatas.Add(new BackSkinData(backSkin.Id, 10, true));
             CurDeckSkin = DeckSkins[CurDeckSkinId];
-            CurBackSkin = BackSkins[CurDeckSkinId];
+            CurBackSkin = BackSkins[CurBackSkinId];
             DeckSkinDatas[0].Durability = -1;
             BackSkinDatas[0].Durability = -1;
         }
@@ -66,6 +67,11 @@ public class SkinManager : MonoBehaviour
         {
             DeckSkinDatas = GameManager.Instance.Save.DeckSkinDatas;
             BackSkinDatas = GameManager.Instance.Save.BackSkinDatas;
+            CurDeckSkin = DeckSkins[GameManager.Instance.Save.CurDeckSkinId];
+            CurBackSkin = BackSkins[GameManager.Instance.Save.CurBackSkinId];
+            CurDeckSkinId = GameManager.Instance.Save.CurDeckSkinId;
+            CurBackSkinId = GameManager.Instance.Save.CurBackSkinId;
+
         }
 
         GameManager.Instance.OnMove += new GameManager.MovesHandler(FirstTimeUseSkin);
@@ -93,8 +99,9 @@ public class SkinManager : MonoBehaviour
             backSkinView.BackSkinData = backSkinData;
             backSkinViews.Add(backSkinView);
         }
-        //ApplyDeckSkin(DeckSkins[0]);
-        //ApplyBackSkin(BackSkins[0]);
+        
+        //ApplyDeckSkin(DeckSkinDatas[CurDeckSkinId]);
+        ApplyBackSkin(BackSkinDatas[CurBackSkinId]);
     }
 
     public void ApplyDeckSkin(DeckSkinData deckSkinData)

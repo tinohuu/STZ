@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.34901962, g: 0.53333336, b: 0.83921576, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -740,6 +740,22 @@ PrefabInstance:
     - target: {fileID: -7776977593034881500, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: Card.IsFaceUp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426770368815410488, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667216909965726247, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787287161843756309, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123811915671777002, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6485743249726397530, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: PreviewSkin
@@ -849,6 +865,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -41.699997
       objectReference: {fileID: 0}
+    - target: {fileID: 8022395593067693402, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195670504718725954, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
 --- !u!114 &9054416710138283699 stripped
@@ -885,6 +909,22 @@ PrefabInstance:
     - target: {fileID: -7776977593034881500, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: Card.IsFaceUp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426770368815410488, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667216909965726247, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787287161843756309, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123811915671777002, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6485743249726397530, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: PreviewSkin
@@ -994,6 +1034,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -41.699997
       objectReference: {fileID: 0}
+    - target: {fileID: 6670941268206101661, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670941268755921082, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670941269198635303, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022395593067693402, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195670504718725954, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
 --- !u!224 &7556213023556292180 stripped
@@ -1030,6 +1090,22 @@ PrefabInstance:
     - target: {fileID: -7776977593034881500, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: Card.IsFaceUp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426770368815410488, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667216909965726247, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787287161843756309, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123811915671777002, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6485743249726397530, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: PreviewSkin
@@ -1139,6 +1215,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -41.699997
       objectReference: {fileID: 0}
+    - target: {fileID: 6670941268206101661, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670941268755921082, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670941269198635303, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022395593067693402, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195670504718725954, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
 --- !u!114 &1902537033538825876 stripped
@@ -1175,6 +1271,22 @@ PrefabInstance:
     - target: {fileID: -7776977593034881500, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: Card.IsFaceUp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426770368815410488, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667216909965726247, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787287161843756309, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123811915671777002, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6485743249726397530, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: PreviewSkin
@@ -1283,6 +1395,26 @@ PrefabInstance:
     - target: {fileID: 6670941268206101658, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -41.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670941268206101661, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670941268755921082, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670941269198635303, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022395593067693402, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195670504718725954, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}

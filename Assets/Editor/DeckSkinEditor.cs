@@ -93,11 +93,12 @@ public class ObjectBuilderEditor : Editor
                 Sprite spt = Resources.Load<Sprite>(rootPath + name);
                 if (spt) foreach (List<Sprite> sprites in deckSkin.BigSuitSprites) sprites[i] = spt;
             }
-            
+            EditorUtility.SetDirty(target);
         }
         if (deckSkin.NumberSprites.Count == 13 && deckSkin.SmallSuitSprites.Count == 4 &&
             deckSkin.BigClubSprites.Count == 13 && deckSkin.BigDiamondSprites.Count == 13 && deckSkin.BigHeartSprites.Count == 13 && deckSkin.BigSpadeSprites.Count == 13)
             EditorGUILayout.HelpBox("Deck skin ready.", MessageType.Info);
         else EditorGUILayout.HelpBox("Sprites missing.", MessageType.Error);
+
     }
 }

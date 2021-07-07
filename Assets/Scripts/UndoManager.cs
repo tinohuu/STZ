@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class UndoManager : MonoBehaviour
 {
     CardManager cardManager;
-    public List<Undo> Undos;
+    public List<Undo> Undos = new List<Undo>();
     public Button UndoButton;
     ViewManager viewManager;
+    public static UndoManager Instance;
     private void Awake()
     {
+        Instance = this;
         cardManager = FindObjectOfType<CardManager>();
         viewManager = FindObjectOfType<ViewManager>();
+        if (GameManager.Instance.Save != null) Undos = new List<Undo>(GameManager.Instance.Save.Undos);
     }
     // Start is called before the first frame update
     void Start()

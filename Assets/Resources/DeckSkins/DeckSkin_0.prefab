@@ -64,6 +64,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b61995f191334274e8b91526472264d7, type: 3}
   - {fileID: 21300000, guid: a6707ba03180780468ceb5d66b5bea26, type: 3}
   - {fileID: 21300000, guid: 117ff704df02b674f803f8c19cc2110b, type: 3}
+  - {fileID: 21300000, guid: 82beaef631c16114fbcfb2cab1c55572, type: 3}
+  - {fileID: 21300000, guid: 23f52030ace49a24ebecc64ca840f926, type: 3}
+  - {fileID: 21300000, guid: c842626c89b57ea4ea0f7c424360eb1c, type: 3}
   SmallSuitSprites:
   - {fileID: 21300000, guid: 3d6881a7185dd704da51e71ca0bb9ce6, type: 3}
   - {fileID: 21300000, guid: 5078b5ab6654943448f011278748a353, type: 3}

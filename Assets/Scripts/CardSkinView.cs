@@ -15,15 +15,15 @@ public class CardSkinView : MonoBehaviour
         cardView = GetComponent<CardView>();
         if (cardView)
         {
-            cardView.UpdateViewDelegate += new CardView.UpdateView(UpdateView);
-            cardView.UpdateViewDelegate += new CardView.UpdateView(UpdateBack);
+            cardView.OnUpdateCardView += new CardView.UpdateView(UpdateView);
+            cardView.OnUpdateCardView += new CardView.UpdateView(UpdateBack);
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (cardView) cardView.UpdateViewDelegate -= new CardView.UpdateView(UpdateView);
+        if (cardView) cardView.OnUpdateCardView -= new CardView.UpdateView(UpdateView);
     }
 
     // Update is called once per frame

@@ -256,7 +256,7 @@ public class ViewManager : MonoBehaviour
 
     public void ShowAutoWin()
     {
-        if (cardManager.IsAllFaceUp && !isAutoWinning) AutoWinButton.SetActive(true);
+        if ((cardManager.IsAllFaceUp || GameManager.Instance.CheatText.activeSelf) && !isAutoWinning) AutoWinButton.SetActive(true);
     }
     public void Shuffle()
     {
@@ -306,7 +306,7 @@ public class ViewManager : MonoBehaviour
                 Card card = null;
                 Pile newPile = null;
 
-                if (piles[i].Type == Pile.PileType.tableau)
+                if (piles[i].Type == Pile.PileType.tableau && !GameManager.Instance.CheatText.activeSelf && false)
                 {
                     card = piles[i].Cards.Last();
                     newPile = cardManager.GetFoundationDest(card, piles[i]);
@@ -316,23 +316,20 @@ public class ViewManager : MonoBehaviour
                     foreach (Card c in piles[i].Cards)
                     {
                         card = c;
-                        newPile = cardManager.GetFoundationDest(c, piles[i]);
+                        newPile = cardManager.GetFoundationDest(c, piles[i], true);
                         if (newPile != null) break;
                     }
                 }
 
                 if (newPile != null)
                 {
-                    Debug.Log("Card " + card.Suit + card.Number + " matches Pile " + newPile);
                     cardManager.UpdateData(card, piles[i], newPile);
-                    if (piles[i].Type == Pile.PileType.hand) card.IsFaceUp = true;
-                    Debug.Log("PileViewCount " + PileToPileView.Count);
+                    card.IsFaceUp = true;
                     foreach (PileView pileView in PileToPileView.Values) Debug.Log(pileView.name + pileView.Pile.Type);
                     PileToPileView[piles[i]].UpdatePileView();
                     PileToPileView[newPile].UpdatePileView();
                     float pauseTime = Vector3.Distance(CardToCardView[card].transform.position, PileToPileView[newPile].transform.position) / gameManager.SettingsData.AnimationSpeed * 0.01f;
                     yield return new WaitForSeconds(Vector3.Distance(CardToCardView[card].transform.position, PileToPileView[newPile].transform.position) / gameManager.SettingsData.AnimationSpeed * 0.01F);
-                    Debug.Log("Wait for " + pauseTime);
                 }
             }
 

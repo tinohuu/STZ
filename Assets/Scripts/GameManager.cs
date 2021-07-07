@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -28,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (!Directory.Exists(Application.dataPath + "/Saves"))
+            Directory.CreateDirectory(Application.dataPath + "/Saves");
+
         Save = SaveSystem.Load();
         if (Save == null)
         {
@@ -50,7 +54,11 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SaveSystem.Save();
+            Application.Quit();
+        }
         if (Input.GetKeyDown(KeyCode.C))
         {
             IsAnyToEmptyPile = !IsAnyToEmptyPile;
@@ -117,8 +125,8 @@ public class SettingsData
     public int DrawCards = 1;
     public bool IsRightHand = true;
     public float AnimationSpeed = 20;
-    public bool Info = true;
-    public bool Volume = true;
+    public bool ShowInfo = true;
+    public bool IsMuted = true;
     public bool IsEoExpanded = false;
 }
 

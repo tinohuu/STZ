@@ -154,9 +154,9 @@ public class CardManager : MonoBehaviour
         newPile.Cards.Add(card);
     }
 
-    public Pile GetFoundationDest(Card card, Pile pile)
+    public Pile GetFoundationDest(Card card, Pile pile, bool ignoreRules = false)
     {
-        if (card != pile.Cards.Last()) return null;
+        if (card != pile.Cards.Last() && !ignoreRules) return null;
         foreach (Pile foundationPile in Foundations)
         {
             if (foundationPile.Cards.Count == 0)

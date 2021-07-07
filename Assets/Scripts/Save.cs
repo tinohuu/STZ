@@ -13,4 +13,5 @@ public class Save
     public List<DeckSkinData> DeckSkinDatas = new List<DeckSkinData>();
     public int CurDeckSkinId = 0;
     public int CurBackSkinId = 0;
+    public List<Undo> Undos = new List<Undo>();
 }

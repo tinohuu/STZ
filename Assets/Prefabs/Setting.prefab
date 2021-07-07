@@ -2235,7 +2235,7 @@ GameObject:
   - component: {fileID: 8695784650738412031}
   - component: {fileID: 8695784650738412017}
   - component: {fileID: 8695784650738412030}
-  - component: {fileID: 320585165410022910}
+  - component: {fileID: 4518191617482719216}
   m_Layer: 5
   m_Name: Setting
   m_TagString: Untagged
@@ -2311,7 +2311,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &320585165410022910
+--- !u!114 &4518191617482719216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2323,14 +2323,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d817d68d520d4b14c9ea15f1c0069f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SettingType: 0
   Toggle: {fileID: 1442221015774761605}
-  ButtonOn: {fileID: 1424090692615471098}
-  ButtonOff: {fileID: 8695784649801697712}
-  Bar:
+  SwapOn: {fileID: 1424090692615471098}
+  SwapOff: {fileID: 8695784649801697712}
+  Multiple:
   - {fileID: 5348703273013343694}
   - {fileID: 5725710919853617999}
   - {fileID: 2579474889082258549}
-  BarImages:
+  MultiImages:
   - {fileID: 5782117328944527515}
   - {fileID: 5686754975630845285}
   - {fileID: 7225245614147801378}

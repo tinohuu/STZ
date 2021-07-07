@@ -33,7 +33,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     public bool isAnimatingMove = false;
 
     public delegate void UpdateView();
-    public event UpdateView UpdateViewDelegate = null;
+    public event UpdateView OnUpdateCardView = null;
     public Vector2 oriSize;
     GameManager gameManager;
     Canvas canvas = null;
@@ -108,7 +108,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     {
         Highlight.gameObject.SetActive(IsHint);
 
-        if (Vector3.Distance(Image.transform.position, transform.position) > 0.1f) Alpha = 0;
+        //if (Vector3.Distance(Image.transform.position, transform.position) > 0.1f) Alpha = 0;
 
         if (animStartPos != null)
         {
@@ -116,37 +116,22 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
             AnimStartTime = Time.time + animPauseTime;
         }
 
-        if (PileView && PileView.Pile.Type == Pile.PileType.tableau)
-        {
-            rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(oriSize.x, oriSize.y / 3) : new Vector2(oriSize.x, oriSize.y / 8);
-            //Image.GetComponent<RectTransform>().anchoredPosition = new Vector2(-25, -75);
-        }
-        else if (PileView && PileView.Pile.Type == Pile.PileType.talon)
-        {
-            if (PileView.Pile.Cards.IndexOf(Card) < PileView.Pile.Cards.Count - gameManager.SettingsData.DrawCards) rectTransform.sizeDelta = new Vector2(0, oriSize.y);
-            else rectTransform.sizeDelta = rectTransform.sizeDelta = oriSize;
-        }
-        else
-        {
-            rectTransform.sizeDelta = oriSize;
-            //Image.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        }
-        //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
-        //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
 
-        //rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(100, 150) : new Vector2(100, 150);
-        //Image.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 150);
-        ///Image.GetComponent<RectTransform>().anchoredPosition = new Vector2(999, 999);
+        // Resize card according to pile type
+        if (PileView)
+        {
+            if (PileView.Pile.Type == Pile.PileType.tableau)
+                rectTransform.sizeDelta = Card.IsFaceUp ? new Vector2(oriSize.x, oriSize.y / 3) : new Vector2(oriSize.x, oriSize.y / 9);
+            else if (PileView && PileView.Pile.Type == Pile.PileType.talon)
+            {
+                if (PileView.Pile.Cards.IndexOf(Card) < PileView.Pile.Cards.Count - gameManager.SettingsData.DrawCards) rectTransform.sizeDelta = new Vector2(0, oriSize.y);
+                else rectTransform.sizeDelta = rectTransform.sizeDelta = oriSize;
+            }
+            else rectTransform.sizeDelta = oriSize;
+        }
 
-
-        if (UpdateViewDelegate != null) UpdateViewDelegate.Invoke();
+        if (OnUpdateCardView != null) OnUpdateCardView.Invoke();
     }
-
-    /*public void CardToPileView(PileView pileView)
-    {
-        OriPos = transform.position;
-        //transform.SetParent(pileView.transform);
-    }*/
 
     void Animate()
     {
@@ -179,7 +164,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
         {
             if (IsHint)
             {
-                Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * gameManager.SettingsData.AnimationSpeed / 2);
+                Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * 10);
                 Alpha = Mathf.Clamp(Vector3.Distance(Image.transform.position, transform.position) / 10, 0, 1);
             }
             else Image.transform.position = Vector3.Lerp(Image.transform.position, transform.position, Time.deltaTime * gameManager.SettingsData.AnimationSpeed);
