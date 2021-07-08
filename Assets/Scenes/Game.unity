@@ -10190,6 +10190,7 @@ GameObject:
   - component: {fileID: 1132702906}
   - component: {fileID: 1132702905}
   - component: {fileID: 1132702907}
+  - component: {fileID: 1132702908}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -10428,6 +10429,30 @@ MonoBehaviour:
   Info: {fileID: 1455113334}
   AnimSpeed: {fileID: 1027285286}
   Volume: {fileID: 248817380}
+--- !u!114 &1132702908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132702899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 822ac665492061c40be63e1686226eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mission:
+    MissionData:
+      Type: 0
+      isETW: 0
+      isChallenge: 0
+      noUndo: 0
+      noHint: 0
+      noShuffle: 0
+      isContinuous: 0
+      Progress: 0
+      MaxProgress: 0
+      Difficulty: 0
 --- !u!1 &1134054291
 GameObject:
   m_ObjectHideFlags: 0

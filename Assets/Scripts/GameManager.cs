@@ -21,25 +21,18 @@ public class GameManager : MonoBehaviour
     public bool IsLocked = false;
     public bool IsAnyToEmptyPile = false;
 
-    public delegate void MovesHandler();
-    public event MovesHandler OnMove = null;
+    public event Handler OnMove = null;
     //int _score = 0;
     //int _moves = 0;
     public static GameManager Instance;
-
+    public delegate void Handler();
     private void Awake()
     {
         if (!Directory.Exists(Application.dataPath + "/Saves"))
             Directory.CreateDirectory(Application.dataPath + "/Saves");
 
         Save = SaveSystem.Load();
-        if (Save == null)
-        {
-            //GameData = new GameData();
-            //SettingsData = new SettingsData();
-            //StatisticsData = new StatisticsData();
-        }
-        else
+        if (Save != null)
         {
             GameData = Save.GameData;
             SettingsData = Save.SettingsData;
@@ -50,7 +43,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        OnMove += new MovesHandler(StartCountTime);
+        OnMove += new Handler(StartCountTime);
     }
     void Update()
     {
@@ -106,16 +99,21 @@ public class GameManager : MonoBehaviour
     {
         SettingsData.DrawCards = isThree? 3 : 1;
     }
+
 }
 
 [System.Serializable]
 public class GameData
 {
+    public enum Mode { normal, easy, challenge }
+    public Mode GameMode = Mode.normal;
     public int Score = 0;
     public int Moves = 0;
     public float Time = 0;
     public int UndoUses = 0;
     public int HintUses = 0;
+    public int ShuffleUses = 0;
+    public int WinningStreak = 0;
 }
 
 

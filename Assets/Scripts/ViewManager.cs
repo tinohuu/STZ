@@ -16,7 +16,7 @@ public class ViewManager : MonoBehaviour
     public GameObject PilePrefab;
     public GameObject CardPrefab;
     public GameObject AutoWinButton;
-    public GameObject Win;
+    public GameObject WinText;
 
     [Header("Data")]
     public List<PileView> TableauViews;
@@ -30,11 +30,15 @@ public class ViewManager : MonoBehaviour
     GameManager gameManager;
     PileView DraggedFrom;
     bool isAutoWinning = false;
-
+    public static ViewManager Instance;
     public Dictionary<Card, CardView> CardToCardView = new Dictionary<Card, CardView>();
     public Dictionary<Pile, PileView> PileToPileView = new Dictionary<Pile, PileView>();
+    public GameManager.Handler OnStartNew = null;
+    public GameManager.Handler OnWin = null;
+    public GameManager.Handler OnShuffle = null;
     private void Awake()
     {
+        Instance = this;
         cardManager = FindObjectOfType<CardManager>();
         gameManager = FindObjectOfType<GameManager>();
         undoManager = FindObjectOfType<UndoManager>();
@@ -72,24 +76,24 @@ public class ViewManager : MonoBehaviour
         HandView.UpdatePileView();
         PileToPileView.Add(cardManager.Hand, HandView);
 
-        gameManager.OnMove += new GameManager.MovesHandler(ShowAutoWin);
+        gameManager.OnMove += new GameManager.Handler(ShowAutoWin);
     }
     void Update()
     {
         Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
-        if (!screenRect.Contains(Input.mousePosition) || Input.GetMouseButtonUp(0)) OnPileEndDrag();
+        if (!screenRect.Contains(Input.mousePosition) || Input.GetMouseButtonUp(0)) OnViewEndDrag();
 
-        Debug.Log("PileViewCount " + PileToPileView.Count);
-
+        //Debug.Log("PileViewCount " + PileToPileView.Count);
+        if (Input.GetKeyDown(KeyCode.X)) StartNew();
         
     }
-    public void OnBeginDragCard(Card card)
+    public void OnViewBeginDrag(Card card)
     {
         if (IsAnyCardAnimating() || isAutoWinning) return;
 
         if (DraggedCardViews.Count > 0 && DraggedCardViews[0] )
         {
-            OnPileEndDrag();
+            OnViewEndDrag();
             return;
         }
 
@@ -104,7 +108,7 @@ public class ViewManager : MonoBehaviour
             cardView.OverrideSorting(true, i + 1);
         }
     }
-    public void OnPileDrag(Vector3 pos)
+    public void OnViewDra(Vector3 pos)
     {
         if (DraggedCardViews.Count == 0 || !DraggedCardViews[0]) return;
         
@@ -122,7 +126,7 @@ public class ViewManager : MonoBehaviour
             }
         }
     }
-    public void OnPileEndDrag()
+    public void OnViewEndDrag()
     {
         if (DraggedCardViews.Count == 0 || !DraggedCardViews[0]) return;
 
@@ -253,7 +257,6 @@ public class ViewManager : MonoBehaviour
         // Count moves
         gameManager.Moves++;
     }
-
     public void ShowAutoWin()
     {
         if ((cardManager.IsAllFaceUp || GameManager.Instance.CheatText.activeSelf) && !isAutoWinning) AutoWinButton.SetActive(true);
@@ -269,6 +272,7 @@ public class ViewManager : MonoBehaviour
         foreach (PileView pile in TableauViews) pile.UpdatePileView();
         undoManager.Undos.Clear();
         FindObjectOfType<HandManager>().OnPointerClick();
+        OnShuffle?.Invoke();
     }
     public bool IsAnyCardAnimating()
     {
@@ -341,9 +345,20 @@ public class ViewManager : MonoBehaviour
             }
 
         }
-
-        Debug.Log("Win");
-        Win.SetActive(true);
+        Win();
         yield return null;
+    }
+
+    public void Win()
+    {
+        WinText.SetActive(true);
+        OnWin.Invoke();
+    }
+
+    public void StartNew()
+    {
+        cardManager.ShuffleAll();
+        foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
+        OnStartNew?.Invoke();
     }
 }

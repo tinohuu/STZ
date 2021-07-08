@@ -19,8 +19,12 @@ public class HintManager : MonoBehaviour
     Canvas canvas;
 
     int hintMoves = 0;
+
+    public static HintManager Instance;
+    public GameManager.Handler OnHint = null;
     private void Awake()
     {
+        Instance = this;
         viewManager = FindObjectOfType<ViewManager>();
         canvas = FindObjectOfType<Canvas>();
         gameManager = FindObjectOfType<GameManager>();
@@ -149,6 +153,8 @@ public class HintManager : MonoBehaviour
 
         // Highlight hand card
         if (OriCardViews.Count == 0) FindObjectOfType<HandManager>().HighlightTimer = Time.time + 1;
+
+        OnHint?.Invoke();
     }
 
     Vector3? GetDestPos(Card card, Pile pile, bool isToFoundation = true, bool isToTableau = true)

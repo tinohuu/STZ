@@ -33,6 +33,10 @@ public class SkinManager : MonoBehaviour
     List<BackSkinView> backSkinViews = new List<BackSkinView>();
     ViewManager viewManager;
 
+    public GameManager.Handler OnGetDeck = null;
+    public GameManager.Handler OnGetBack = null;
+    public GameManager.Handler OnUseDeck = null;
+    public GameManager.Handler OnUseBack = null;
     private void Awake()
     {
         Instance = this;
@@ -55,13 +59,10 @@ public class SkinManager : MonoBehaviour
 
         if (GameManager.Instance.Save == null)
         {
-
-            foreach (DeckSkin deckSkin in DeckSkins) DeckSkinDatas.Add(new DeckSkinData(deckSkin.Id, 10, true));
-            foreach (BackSkin backSkin in BackSkins) BackSkinDatas.Add(new BackSkinData(backSkin.Id, 10, true));
+            for (int i = 0; i < DeckSkins.Count; i++) DeckSkinDatas.Add(new DeckSkinData(DeckSkins[i].Id, i == 0 ? -1 : 10, true));
+            for (int i = 0; i < BackSkins.Count; i++) BackSkinDatas.Add(new BackSkinData(BackSkins[i].Id, i == 0 ? -1 : 10, true));
             CurDeckSkin = DeckSkins[CurDeckSkinId];
             CurBackSkin = BackSkins[CurBackSkinId];
-            DeckSkinDatas[0].Durability = -1;
-            BackSkinDatas[0].Durability = -1;
         }
         else
         {
@@ -71,10 +72,9 @@ public class SkinManager : MonoBehaviour
             CurBackSkin = BackSkins[GameManager.Instance.Save.CurBackSkinId];
             CurDeckSkinId = GameManager.Instance.Save.CurDeckSkinId;
             CurBackSkinId = GameManager.Instance.Save.CurBackSkinId;
-
         }
 
-        GameManager.Instance.OnMove += new GameManager.MovesHandler(FirstTimeUseSkin);
+
     }
     private void Start()
     {
@@ -94,7 +94,7 @@ public class SkinManager : MonoBehaviour
         BackSkinsArea.DestoryChildren();
         foreach (BackSkinData backSkinData in BackSkinDatas)
         {
-            Debug.Log("Create back skin slots.");
+            //Debug.Log("Create back skin slots.");
             BackSkinView backSkinView = Instantiate(BackSkinViewPrefab, BackSkinsArea).GetComponent<BackSkinView>();
             backSkinView.BackSkinData = backSkinData;
             backSkinViews.Add(backSkinView);
@@ -102,6 +102,14 @@ public class SkinManager : MonoBehaviour
         
         //ApplyDeckSkin(DeckSkinDatas[CurDeckSkinId]);
         ApplyBackSkin(BackSkinDatas[CurBackSkinId]);
+
+        GameManager.Instance.OnMove += new GameManager.Handler(UseSkin);
+        OnGetDeck += () => Debug.Log("You got a new deck.");
+        OnGetBack += () => Debug.Log("You got a new back.");
+        OnUseDeck += () => Debug.Log("You used a deck.");
+        OnUseBack += () => Debug.Log("You used a back.");
+        ViewManager.Instance.OnStartNew += new GameManager.Handler(UseCurDeckSkin);
+        ViewManager.Instance.OnStartNew += new GameManager.Handler(UseCurBackSkin);
     }
 
     public void ApplyDeckSkin(DeckSkinData deckSkinData)
@@ -149,18 +157,48 @@ public class SkinManager : MonoBehaviour
         foreach (BackSkinView backSkinView in backSkinViews) backSkinView.UpdateView();
     }
 
-    public void FirstTimeUseSkin()
+    public void UseSkin()
     {
-        if (CurDeckSkin.Id != CurDeckSkinId)
+        if (CurDeckSkin.Id != CurDeckSkinId) UseCurDeckSkin();
+        if (CurBackSkin.Id != CurBackSkinId) UseCurBackSkin();
+    }
+
+    public void UseCurDeckSkin()
+    {
+        if (DeckSkinDatas[CurDeckSkin.Id].Durability == 0)
         {
-            DeckSkinDatas[CurDeckSkin.Id].Durability = DeckSkinDatas[CurDeckSkin.Id].Durability == -1 ? -1 : DeckSkinDatas[CurDeckSkin.Id].Durability - 1;
+            CurDeckSkinId = 0;
+            ApplyDeckSkin(DeckSkinDatas[0]);
+            return;
+        }
+        else if (DeckSkinDatas[CurDeckSkin.Id].Durability == -1)
+        {
             CurDeckSkinId = CurDeckSkin.Id;
+            return;
         }
-        if (CurBackSkin.Id != CurBackSkinId)
+
+        DeckSkinDatas[CurDeckSkin.Id].Durability = DeckSkinDatas[CurDeckSkin.Id].Durability == -1 ? -1 : DeckSkinDatas[CurDeckSkin.Id].Durability - 1;
+        CurDeckSkinId = CurDeckSkin.Id;
+        OnUseDeck?.Invoke();
+    }
+
+    public void UseCurBackSkin()
+    {
+        if (BackSkinDatas[CurBackSkin.Id].Durability == 0)
         {
-            BackSkinDatas[CurBackSkin.Id].Durability = BackSkinDatas[CurBackSkin.Id].Durability == -1 ? -1 : BackSkinDatas[CurBackSkin.Id].Durability - 1;
-            CurBackSkinId = CurBackSkin.Id;
+            CurDeckSkinId = 0;
+            ApplyBackSkin(BackSkinDatas[0]);
+            return;
         }
+        else if (BackSkinDatas[CurBackSkin.Id].Durability == -1)
+        {
+            CurBackSkinId = CurBackSkin.Id;
+            return;
+        }
+
+        BackSkinDatas[CurBackSkin.Id].Durability = BackSkinDatas[CurBackSkin.Id].Durability == -1 ? -1 : BackSkinDatas[CurBackSkin.Id].Durability - 1;
+        CurBackSkinId = CurBackSkin.Id;
+        OnUseBack?.Invoke();
     }
 }
 
@@ -170,10 +208,20 @@ public class SkinManager : MonoBehaviour
 public class DeckSkinData : SkinData
 {
     public int Id = 0;
+    public int Durability
+    {
+        set
+        {
+            _durability = value;
+            if (value > _durability) SkinManager.Instance.OnGetDeck.Invoke();
+            else if (value < _durability) SkinManager.Instance.OnUseDeck.Invoke();
+        }
+        get => _durability;
+    }
     public DeckSkinData(int id, int durability, bool isNew)
     {
         Id = id;
-        Durability = durability;
+        _durability = durability;
         IsNew = isNew;
     }
 }
@@ -182,11 +230,20 @@ public class DeckSkinData : SkinData
 public class BackSkinData : SkinData
 {
     public int Id = 0;
-
+    public int Durability
+    {
+        set
+        {
+            _durability = value;
+            if (value > _durability) SkinManager.Instance.OnGetBack.Invoke();
+            else if (value < _durability) SkinManager.Instance.OnUseBack.Invoke();
+        }
+        get => _durability;
+    }
     public BackSkinData(int id, int durability, bool isNew)
     {
         Id = id;
-        Durability = durability;
+        _durability = durability;
         IsNew = isNew;
     }
 }
@@ -194,7 +251,8 @@ public class BackSkinData : SkinData
 [System.Serializable]
 public class SkinData
 {
-    public int Durability = 0; // -1 : infinite
+    [SerializeField] protected int _durability = 0; // -1 : infinite
     public bool IsNew = true;
+
 }
 

@@ -80,13 +80,13 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
 
         if (PileView.Pile.Type != Pile.PileType.tableau && PileView.Pile.Cards.Last() != Card) return;
 
-        viewManager.OnBeginDragCard(Card);
+        viewManager.OnViewBeginDrag(Card);
     }
 
     public void OnDrag(PointerEventData data)
     {
         if (!Card.IsFaceUp || IsHint) return;
-        viewManager.OnPileDrag(data.position);
+        viewManager.OnViewDra(data.position);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -102,7 +102,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     public void OnDrop(PointerEventData data)
     {
         if (!Card.IsFaceUp || IsHint) return;
-        viewManager.OnPileEndDrag();
+        viewManager.OnViewEndDrag();
     }
     public void UpdateCardView(Vector3? animStartPos = null, float animPauseTime = 0)
     {

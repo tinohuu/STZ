@@ -44,7 +44,7 @@ public class SettingView : MonoBehaviour
     {
         set
         {
-            Debug.Log("ButtonData " + value);
+            //Debug.Log("ButtonData " + value);
             if (value == true) SwapOn.onClick.Invoke();
             else SwapOff.onClick.Invoke();
             isSetup = true;

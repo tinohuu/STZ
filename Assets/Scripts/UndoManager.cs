@@ -9,6 +9,7 @@ public class UndoManager : MonoBehaviour
     public List<Undo> Undos = new List<Undo>();
     public Button UndoButton;
     ViewManager viewManager;
+    public GameManager.Handler OnUndo = null;
     public static UndoManager Instance;
     private void Awake()
     {
@@ -17,13 +18,7 @@ public class UndoManager : MonoBehaviour
         viewManager = FindObjectOfType<ViewManager>();
         if (GameManager.Instance.Save != null) Undos = new List<Undo>(GameManager.Instance.Save.Undos);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         UndoButton.interactable = Undos.Count != 0;
@@ -31,6 +26,7 @@ public class UndoManager : MonoBehaviour
 
     public void Undo()
     {
+        
         /*
         if (viewManager.IsAnyCardAnimating() || Undos.Count == 0) return;
 
@@ -123,7 +119,12 @@ public class UndoManager : MonoBehaviour
         viewManager.PileToPileView[Undos.Last().ToPile].UpdatePileView();
         viewManager.PileToPileView[Undos.Last().FromPile].UpdatePileView();
         Undos.RemoveAt(Undos.Count - 1);
+
+        
         FindObjectOfType<GameManager>().Moves++;
+
+        // Trigger methods registered in OnUndo
+        OnUndo?.Invoke();
     }
 }
 

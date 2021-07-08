@@ -38,7 +38,7 @@ public class UIScaler : MonoBehaviour
 
     public void ScaleHeight(float height)
     {
-        Debug.Log(name + " scales to " + height);
+        //Debug.Log(name + " scales to " + height);
         if (gameObject.activeSelf) targetHeight = height;
         else rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, height);
     }
