@@ -97,9 +97,9 @@ public class CardManager : MonoBehaviour
             AllPiles[i].Cards = piles[i];
         }
     }
-    public void ShuffleAll()
+    public void Redeal(bool shuffle = true)
     {
-        Shuffle(Deck);
+        if (shuffle) Shuffle(Deck);
         foreach (Card card in Deck) card.IsFaceUp = false;
         Hand.Cards.Clear();
         Talon.Cards.Clear();

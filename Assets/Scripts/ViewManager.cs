@@ -77,6 +77,9 @@ public class ViewManager : MonoBehaviour
         PileToPileView.Add(cardManager.Hand, HandView);
 
         gameManager.OnMove += new GameManager.Handler(ShowAutoWin);
+        OnStartNew += () => Debug.Log("You started a new game.");
+        OnWin += () => Debug.Log("You win.");
+        OnShuffle += () => Debug.Log("You shuffled your hand.");
     }
     void Update()
     {
@@ -108,7 +111,7 @@ public class ViewManager : MonoBehaviour
             cardView.OverrideSorting(true, i + 1);
         }
     }
-    public void OnViewDra(Vector3 pos)
+    public void OnViewDrag(Vector3 pos)
     {
         if (DraggedCardViews.Count == 0 || !DraggedCardViews[0]) return;
         
@@ -357,8 +360,33 @@ public class ViewManager : MonoBehaviour
 
     public void StartNew()
     {
-        cardManager.ShuffleAll();
+        cardManager.Redeal();
         foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
+        GameManager.Instance.GameData.GameMode = GameData.Mode.normal;
         OnStartNew?.Invoke();
+    }
+
+    public void StartETW()
+    {
+        cardManager.Redeal();
+        foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
+        GameManager.Instance.GameData.GameMode = GameData.Mode.easy;
+        OnStartNew?.Invoke();
+    }
+
+    public void StartChallenge()
+    {
+        cardManager.Redeal();
+        foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
+        GameManager.Instance.GameData.GameMode = GameData.Mode.challenge;
+        OnStartNew?.Invoke();
+    }
+
+    public void Replay()
+    {
+        cardManager.Redeal(false);
+        foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
+        GameManager.Instance.GameData.GameMode = GameData.Mode.challenge;
+        //OnStartNew?.Invoke();
     }
 }

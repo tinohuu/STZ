@@ -1756,6 +1756,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79314248}
   m_CullTransparentMesh: 1
+--- !u!1 &84906018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 84906019}
+  - component: {fileID: 84906021}
+  - component: {fileID: 84906020}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &84906019
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84906018}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 372925962}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &84906020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84906018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Button
+--- !u!222 &84906021
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84906018}
+  m_CullTransparentMesh: 1
 --- !u!1 &99658144
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,6 +4034,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334707830}
   m_CullTransparentMesh: 1
+--- !u!1 &338557330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 338557331}
+  - component: {fileID: 338557333}
+  - component: {fileID: 338557332}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &338557331
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338557330}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1819115818}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &338557332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338557330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 32
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Replay Game
+--- !u!222 &338557333
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338557330}
+  m_CullTransparentMesh: 1
 --- !u!1 &362105937
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,6 +4145,7 @@ RectTransform:
   - {fileID: 79314249}
   - {fileID: 1841579717}
   - {fileID: 965175615}
+  - {fileID: 735402786}
   m_Father: {fileID: 1422964424}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4032,6 +4191,127 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362105937}
+  m_CullTransparentMesh: 1
+--- !u!1 &372925961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 372925962}
+  - component: {fileID: 372925965}
+  - component: {fileID: 372925964}
+  - component: {fileID: 372925963}
+  m_Layer: 5
+  m_Name: Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &372925962
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372925961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 84906019}
+  m_Father: {fileID: 530976094}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &372925963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372925961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 372925964}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &372925964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372925961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &372925965
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372925961}
   m_CullTransparentMesh: 1
 --- !u!1 &390041779
 GameObject:
@@ -4998,7 +5278,7 @@ GameObject:
   - component: {fileID: 475573091}
   - component: {fileID: 475573090}
   m_Layer: 5
-  m_Name: Undo
+  m_Name: Daily Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5067,7 +5347,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 475573091}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1532957545}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 530976097}
+        m_TargetAssemblyTypeName: UIScaler, Assembly-CSharp
+        m_MethodName: ScaleXScale
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &475573091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5807,6 +6111,112 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &530976093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530976094}
+  - component: {fileID: 530976096}
+  - component: {fileID: 530976095}
+  - component: {fileID: 530976097}
+  - component: {fileID: 530976098}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &530976094
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530976093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 372925962}
+  m_Father: {fileID: 1532957549}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &530976095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530976093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 2
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &530976096
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530976093}
+  m_CullTransparentMesh: 1
+--- !u!114 &530976097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530976093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5618966cfd4556418648f5c45680331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 5
+  IsLerp: 1
+  oriLocalScale: {x: 0, y: 0}
+--- !u!114 &530976098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530976093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &535489331
 GameObject:
   m_ObjectHideFlags: 0
@@ -6826,6 +7236,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698414286}
   m_CullTransparentMesh: 1
+--- !u!1 &713087645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 713087646}
+  - component: {fileID: 713087648}
+  - component: {fileID: 713087647}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &713087646
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713087645}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1647336681}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &713087647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713087645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 32
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Game
+--- !u!222 &713087648
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713087645}
+  m_CullTransparentMesh: 1
 --- !u!1001 &734972725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6928,6 +7417,141 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 790083254287424910, guid: 08fbd7ed782c74242be886414faccda2, type: 3}
   m_PrefabInstance: {fileID: 734972725}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &735402785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 735402786}
+  - component: {fileID: 735402789}
+  - component: {fileID: 735402788}
+  - component: {fileID: 735402787}
+  - component: {fileID: 735402790}
+  - component: {fileID: 735402791}
+  m_Layer: 5
+  m_Name: Play Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &735402786
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735402785}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1759478526}
+  - {fileID: 1647336681}
+  - {fileID: 1819115818}
+  m_Father: {fileID: 362105938}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 180}
+  m_SizeDelta: {x: 500, y: 0}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &735402787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735402785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 0
+--- !u!114 &735402788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735402785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &735402789
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735402785}
+  m_CullTransparentMesh: 1
+--- !u!114 &735402790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735402785}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &735402791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735402785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5618966cfd4556418648f5c45680331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 15
+  IsLerp: 1
+  oriLocalScale: {x: 0, y: 0}
 --- !u!1 &747881466
 GameObject:
   m_ObjectHideFlags: 0
@@ -10228,11 +10852,14 @@ MonoBehaviour:
   CheatText: {fileID: 2099807964}
   Save:
     GameData:
+      GameMode: 0
       Score: 0
       Moves: 0
       Time: 0
       UndoUses: 0
       HintUses: 0
+      ShuffleUses: 0
+      WinningStreak: 0
     SettingsData:
       DrawCards: 1
       IsRightHand: 1
@@ -10257,11 +10884,14 @@ MonoBehaviour:
     CurBackSkinId: 0
     Undos: []
   GameData:
+    GameMode: 0
     Score: 0
     Moves: 0
     Time: 0
     UndoUses: 0
     HintUses: 0
+    ShuffleUses: 0
+    WinningStreak: 0
   SettingsData:
     DrawCards: 1
     IsRightHand: 1
@@ -10377,7 +11007,7 @@ MonoBehaviour:
   PilePrefab: {fileID: 1895256396541304982, guid: 56541a0156c8c9e4984bf56d09792827, type: 3}
   CardPrefab: {fileID: 6670941268070311659, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
   AutoWinButton: {fileID: 1112956574}
-  Win: {fileID: 1569540716}
+  WinText: {fileID: 1569540716}
   TableauViews: []
   FoundationViews: []
   HandView: {fileID: 243435412}
@@ -10441,18 +11071,974 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822ac665492061c40be63e1686226eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mission:
-    MissionData:
-      Type: 0
-      isETW: 0
-      isChallenge: 0
-      noUndo: 0
-      noHint: 0
-      noShuffle: 0
-      isContinuous: 0
-      Progress: 0
-      MaxProgress: 0
-      Difficulty: 0
+  MaxMissions: 4
+  CurMissions: []
+  EasyMissions:
+  - MissionType: 1
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 2
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 3
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 3
+    isETW: 1
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 1
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 1
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 1
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 1
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 1
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 5
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 6
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 7
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 8
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 9
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 11
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 0
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  MidMissions:
+  - MissionType: 1
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 2
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 3
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 5
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 3
+    isETW: 1
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 1
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 1
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 1
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 1
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 1
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 5
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 6
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 7
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 8
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 1
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  HardMissions:
+  - MissionType: 1
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 2
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 3
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 10
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 3
+    isETW: 1
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 1
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 1
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 1
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 1
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 1
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 1
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 1
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 5
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 5
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 6
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 4
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 7
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 4
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 8
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 4
+    Difficulty: 2
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  ExtraMissions:
+  - MissionType: 1
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 2
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 2
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 3
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 15
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 3
+    isETW: 1
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 5
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 1
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 1
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 1
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 7
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 1
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 5
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 5
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 1
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 1
+    noShuffle: 0
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 4
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 1
+    isContinuous: 1
+    Progress: 0
+    MaxProgress: 3
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 5
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 6
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 6
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 6
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 7
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 6
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 8
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 6
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  - MissionType: 10
+    isETW: 0
+    isChallenge: 0
+    noUndo: 0
+    noHint: 0
+    noShuffle: 0
+    isContinuous: 0
+    Progress: 0
+    MaxProgress: 4
+    Difficulty: 3
+    RewardData:
+      RewardType: 0
+      SkinId: 0
+      Count: 0
+  PresetMissionsCount: 64
+  EasyRewards:
+  - RewardType: 3
+    SkinId: 0
+    Count: 1
+  - RewardType: 4
+    SkinId: 0
+    Count: 1
+  - RewardType: 5
+    SkinId: 0
+    Count: 11
+  - RewardType: 1
+    SkinId: 0
+    Count: 5
+  - RewardType: 2
+    SkinId: 0
+    Count: 5
+  MidRewards:
+  - RewardType: 3
+    SkinId: 0
+    Count: 2
+  - RewardType: 4
+    SkinId: 0
+    Count: 2
+  - RewardType: 5
+    SkinId: 0
+    Count: 12
+  - RewardType: 1
+    SkinId: 0
+    Count: 5
+  - RewardType: 2
+    SkinId: 0
+    Count: 5
+  HardRewards:
+  - RewardType: 3
+    SkinId: 0
+    Count: 3
+  - RewardType: 4
+    SkinId: 0
+    Count: 3
+  - RewardType: 5
+    SkinId: 0
+    Count: 22
+  - RewardType: 1
+    SkinId: 0
+    Count: 10
+  - RewardType: 2
+    SkinId: 0
+    Count: 10
+  ExtraRewards:
+  - RewardType: 3
+    SkinId: 0
+    Count: 4
+  - RewardType: 4
+    SkinId: 0
+    Count: 3
+  - RewardType: 5
+    SkinId: 0
+    Count: 44
+  - RewardType: 1
+    SkinId: 0
+    Count: 10
+  - RewardType: 2
+    SkinId: 0
+    Count: 10
+  PresetRewardsCount: 20
 --- !u!1 &1134054291
 GameObject:
   m_ObjectHideFlags: 0
@@ -12095,6 +13681,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290225527}
   m_CullTransparentMesh: 1
+--- !u!1 &1293124249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1293124250}
+  - component: {fileID: 1293124252}
+  - component: {fileID: 1293124251}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1293124250
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293124249}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1759478526}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1293124251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293124249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 32
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Easy To Win
+--- !u!222 &1293124252
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293124249}
+  m_CullTransparentMesh: 1
 --- !u!224 &1310105309 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8695784650738412031, guid: 9f6240959432b0d46abba78fa91b1205, type: 3}
@@ -12834,15 +14499,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CardViewManager, Assembly-CSharp
-        m_MethodName: Shuffle
-        m_Mode: 1
+      - m_Target: {fileID: 735402791}
+        m_TargetAssemblyTypeName: UIScaler, Assembly-CSharp
+        m_MethodName: SwitchHeight
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 300
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -13977,6 +15642,106 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6670941268070311658, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
   m_PrefabInstance: {fileID: 1526957382}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1532957545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532957549}
+  - component: {fileID: 1532957548}
+  - component: {fileID: 1532957547}
+  - component: {fileID: 1532957546}
+  m_Layer: 5
+  m_Name: Daily_Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1532957546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532957545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1532957547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532957545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 750, y: 1334}
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 0.5
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1532957548
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532957545}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 3
+  m_TargetDisplay: 0
+--- !u!224 &1532957549
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532957545}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 530976094}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1536391433
 GameObject:
   m_ObjectHideFlags: 0
@@ -15293,6 +17058,151 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646461151}
   m_CullTransparentMesh: 1
+--- !u!1 &1647336680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1647336681}
+  - component: {fileID: 1647336684}
+  - component: {fileID: 1647336683}
+  - component: {fileID: 1647336682}
+  m_Layer: 5
+  m_Name: NewGame Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1647336681
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647336680}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 713087646}
+  m_Father: {fileID: 735402786}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -150}
+  m_SizeDelta: {x: 500, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1647336682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647336680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1647336683}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1132702904}
+        m_TargetAssemblyTypeName: ViewManager, Assembly-CSharp
+        m_MethodName: StartNew
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 735402791}
+        m_TargetAssemblyTypeName: UIScaler, Assembly-CSharp
+        m_MethodName: ScaleHeight
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1647336683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647336680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1647336684
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647336680}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1655854975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16346,6 +18256,151 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d817d68d520d4b14c9ea15f1c0069f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1759478525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1759478526}
+  - component: {fileID: 1759478529}
+  - component: {fileID: 1759478528}
+  - component: {fileID: 1759478527}
+  m_Layer: 5
+  m_Name: EasyToWin Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1759478526
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759478525}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1293124250}
+  m_Father: {fileID: 735402786}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -50}
+  m_SizeDelta: {x: 500, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1759478527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759478525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1759478528}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1132702904}
+        m_TargetAssemblyTypeName: ViewManager, Assembly-CSharp
+        m_MethodName: StartETW
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 735402791}
+        m_TargetAssemblyTypeName: UIScaler, Assembly-CSharp
+        m_MethodName: ScaleHeight
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1759478528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759478525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1759478529
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759478525}
+  m_CullTransparentMesh: 1
 --- !u!1 &1760275807
 GameObject:
   m_ObjectHideFlags: 0
@@ -17144,6 +19199,151 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6670941268070311658, guid: b425b01c373ca88439e49f3e069cb92c, type: 3}
   m_PrefabInstance: {fileID: 1808578241}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1819115817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1819115818}
+  - component: {fileID: 1819115821}
+  - component: {fileID: 1819115820}
+  - component: {fileID: 1819115819}
+  m_Layer: 5
+  m_Name: ReplayGame Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1819115818
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819115817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 338557331}
+  m_Father: {fileID: 735402786}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -250}
+  m_SizeDelta: {x: 500, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1819115819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819115817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1819115820}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1132702904}
+        m_TargetAssemblyTypeName: ViewManager, Assembly-CSharp
+        m_MethodName: Replay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 735402791}
+        m_TargetAssemblyTypeName: UIScaler, Assembly-CSharp
+        m_MethodName: ScaleHeight
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1819115820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819115817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1819115821
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819115817}
+  m_CullTransparentMesh: 1
 --- !u!1 &1820753099
 GameObject:
   m_ObjectHideFlags: 0
@@ -18906,6 +21106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   IsLerp: 1
+  oriLocalScale: {x: 0, y: 0}
 --- !u!114 &1980648914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19792,6 +21993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   IsLerp: 1
+  oriLocalScale: {x: 0, y: 0}
 --- !u!114 &2028253423
 MonoBehaviour:
   m_ObjectHideFlags: 0

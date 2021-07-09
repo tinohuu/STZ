@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
             GameData = Save.GameData;
             SettingsData = Save.SettingsData;
             StatisticsData = Save.StatisticsData;
+            //Debug.LogWarning("Save Time:" + GameData.DateTime);
         }
 
         Instance = this;

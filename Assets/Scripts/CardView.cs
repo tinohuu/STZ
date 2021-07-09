@@ -86,7 +86,7 @@ public class CardView : MonoBehaviour, IDragHandler, IDropHandler, IBeginDragHan
     public void OnDrag(PointerEventData data)
     {
         if (!Card.IsFaceUp || IsHint) return;
-        viewManager.OnViewDra(data.position);
+        viewManager.OnViewDrag(data.position);
     }
 
     public void OnPointerClick(PointerEventData eventData)

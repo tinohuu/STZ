@@ -19,6 +19,8 @@ public static class SaveSystem
             save.Piles.Add(cards);
         }
         // Save data
+        //GameManager.Instance.GameData.DateTime = DateTime.Now;
+        //Debug.LogWarning("Save Time:" + DateTime.Now);
         save.GameData = GameManager.Instance.GameData;
         save.SettingsData = GameManager.Instance.SettingsData;
         save.StatisticsData = GameManager.Instance.StatisticsData;
