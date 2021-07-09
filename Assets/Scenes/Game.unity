@@ -6130,7 +6130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &530976094
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11298,20 +11298,6 @@ MonoBehaviour:
       RewardType: 0
       SkinId: 0
       Count: 0
-  - MissionType: 11
-    isETW: 0
-    isChallenge: 0
-    noUndo: 0
-    noHint: 0
-    noShuffle: 0
-    isContinuous: 0
-    Progress: 0
-    MaxProgress: 1
-    Difficulty: 0
-    RewardData:
-      RewardType: 0
-      SkinId: 0
-      Count: 0
   MidMissions:
   - MissionType: 1
     isETW: 0
@@ -11504,7 +11490,7 @@ MonoBehaviour:
     noShuffle: 0
     isContinuous: 0
     Progress: 0
-    MaxProgress: 2
+    MaxProgress: 1
     Difficulty: 2
     RewardData:
       RewardType: 0
@@ -11518,7 +11504,7 @@ MonoBehaviour:
     noShuffle: 0
     isContinuous: 0
     Progress: 0
-    MaxProgress: 2
+    MaxProgress: 1
     Difficulty: 2
     RewardData:
       RewardType: 0
@@ -11959,23 +11945,15 @@ MonoBehaviour:
       RewardType: 0
       SkinId: 0
       Count: 0
-  - MissionType: 10
-    isETW: 0
-    isChallenge: 0
-    noUndo: 0
-    noHint: 0
-    noShuffle: 0
-    isContinuous: 0
-    Progress: 0
-    MaxProgress: 4
-    Difficulty: 3
-    RewardData:
-      RewardType: 0
-      SkinId: 0
-      Count: 0
-  PresetMissionsCount: 64
+  PresetMissionsCount: 62
   EasyRewards:
   - RewardType: 3
+    SkinId: 0
+    Count: 1
+  - RewardType: 3
+    SkinId: 0
+    Count: 1
+  - RewardType: 4
     SkinId: 0
     Count: 1
   - RewardType: 4
@@ -11994,6 +11972,12 @@ MonoBehaviour:
   - RewardType: 3
     SkinId: 0
     Count: 2
+  - RewardType: 3
+    SkinId: 0
+    Count: 2
+  - RewardType: 4
+    SkinId: 0
+    Count: 2
   - RewardType: 4
     SkinId: 0
     Count: 2
@@ -12010,6 +11994,12 @@ MonoBehaviour:
   - RewardType: 3
     SkinId: 0
     Count: 3
+  - RewardType: 3
+    SkinId: 0
+    Count: 3
+  - RewardType: 4
+    SkinId: 0
+    Count: 3
   - RewardType: 4
     SkinId: 0
     Count: 3
@@ -12018,14 +12008,20 @@ MonoBehaviour:
     Count: 22
   - RewardType: 1
     SkinId: 0
-    Count: 10
+    Count: 5
   - RewardType: 2
     SkinId: 0
-    Count: 10
+    Count: 5
   ExtraRewards:
   - RewardType: 3
     SkinId: 0
     Count: 4
+  - RewardType: 3
+    SkinId: 0
+    Count: 4
+  - RewardType: 4
+    SkinId: 0
+    Count: 3
   - RewardType: 4
     SkinId: 0
     Count: 3
@@ -12038,7 +12034,7 @@ MonoBehaviour:
   - RewardType: 2
     SkinId: 0
     Count: 10
-  PresetRewardsCount: 20
+  PresetRewardsCount: 28
 --- !u!1 &1134054291
 GameObject:
   m_ObjectHideFlags: 0

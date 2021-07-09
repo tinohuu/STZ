@@ -1,5 +1,5 @@
-﻿getDeck,1,1,2,2
-getBack,1,1,2,2
+﻿getDeck,1,1,1,2
+getBack,1,1,1,2
 playGame,3,5,10,15
 playGame_isETW,1,2,3,5
 winGame,1,2,3,0
@@ -17,5 +17,3 @@ useShuffle,2,3,4,6
 useDeck,2,3,4,6
 useBack,2,3,4,6
 doneEO,1,0,0,0
-doneOther,0,0,0,4
-openDaily,1,0,0,0
