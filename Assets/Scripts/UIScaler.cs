@@ -9,6 +9,7 @@ public class UIScaler : MonoBehaviour
     float? targetXSclae = null;
     public float Speed = 1;
     public bool IsLerp = true;
+    public bool IsSwitch = false;
 
     public Vector2 oriLocalScale = new Vector2();
     public Vector3? targetLocalScale = null;
@@ -86,6 +87,7 @@ public class UIScaler : MonoBehaviour
 
     public void ScaleXScale(float scale)
     {
+        gameObject.SetActive(true);
         if (targetLocalScale == null) targetLocalScale = new Vector3(scale, rectTransform.localScale.y, rectTransform.localScale.z);
         else targetLocalScale = new Vector3(scale, ((Vector3)targetLocalScale).y, ((Vector3)targetLocalScale).z);
     }
@@ -98,6 +100,7 @@ public class UIScaler : MonoBehaviour
 
     public void ScaleXSize(float height)
     {
+        gameObject.SetActive(true);
         if (targetSizeDelta == null) targetSizeDelta = new Vector2(height, rectTransform.sizeDelta.y);
         else targetSizeDelta = new Vector3(height, ((Vector3)targetSizeDelta).y, ((Vector3)targetSizeDelta).z);
     }
