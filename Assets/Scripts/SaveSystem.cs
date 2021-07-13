@@ -24,6 +24,7 @@ public static class SaveSystem
         save.GameData = GameManager.Instance.GameData;
         save.SettingsData = GameManager.Instance.SettingsData;
         save.StatisticsData = GameManager.Instance.StatisticsData;
+        save.Deck = CardManager.Instance.Deck;
         // Save skin data
         save.DeckSkinDatas = SkinManager.Instance.DeckSkinDatas;
         save.BackSkinDatas = SkinManager.Instance.BackSkinDatas;
@@ -31,6 +32,11 @@ public static class SaveSystem
         save.CurBackSkinId = SkinManager.Instance.CurBackSkinId;
         // Save undo data
         save.Undos = UndoManager.Instance.Undos;
+        // Save mission data
+        save.MissionUpdateTime = MissionManager.Instance.MissionUpdateDate;
+        List<MissionData> missionDatas = new List<MissionData>();
+        foreach (Mission mission in MissionManager.Instance.CurMissions) missionDatas.Add(mission.MissionData);
+        save.MissionDatas = missionDatas;
 
         BinaryFormatter bf = new BinaryFormatter();
 

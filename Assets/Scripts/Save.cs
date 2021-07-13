@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
+    public List<Card> Deck = new List<Card>();
     public List<List<Card>> Piles = new List<List<Card>>();
     public GameData GameData = null;
     public SettingsData SettingsData = null;
@@ -18,4 +19,5 @@ public class Save
     public List<Undo> Undos = new List<Undo>();
     // Mission System
     public System.DateTime MissionUpdateTime = new System.DateTime();
+    public List<MissionData> MissionDatas = new List<MissionData>();
 }

@@ -115,6 +115,9 @@ public class GameData
     public int HintUses = 0;
     public int ShuffleUses = 0;
     public int WinningStreak = 0;
+    public int ShuffleCount = 0;
+    public int HintCount = 0;
+    public bool IsWon = false;
 }
 
 

@@ -72,6 +72,7 @@ public class CardManager : MonoBehaviour
     }
     public void SetupSaved()
     {
+        Deck = GameManager.Instance.Save.Deck;
         // Create pile
         Hand = new Pile(Pile.PileType.hand, null);
         Talon = new Pile(Pile.PileType.talon, null);
@@ -93,7 +94,7 @@ public class CardManager : MonoBehaviour
         List<List<Card>> piles = GameManager.Instance.Save.Piles;
         for (int i = 0; i < piles.Count; i++)
         {
-            Deck.AddRange(piles[i]);
+            //Deck.AddRange(piles[i]);
             AllPiles[i].Cards = piles[i];
         }
     }

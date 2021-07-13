@@ -296,6 +296,7 @@ public class ViewManager : MonoBehaviour
     {
         AutoWinButton.SetActive(false);
         isAutoWinning = true;
+        GameManager.Instance.GameData.IsWon = true;
         undoManager.Undos.Clear();
         StartCoroutine(AnimateAutoWin());
     }
@@ -355,38 +356,40 @@ public class ViewManager : MonoBehaviour
     public void Win()
     {
         WinText.SetActive(true);
+        isAutoWinning = false;
+        GameManager.Instance.GameData.IsWon = true;
+        GameManager.Instance.GameData.WinningStreak++;
         OnWin.Invoke();
     }
 
     public void StartNew()
     {
-        cardManager.Redeal();
-        foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
-        GameManager.Instance.GameData.GameMode = GameData.Mode.normal;
-        OnStartNew?.Invoke();
+        StartGame(GameData.Mode.normal);
     }
 
     public void StartETW()
     {
-        cardManager.Redeal();
-        foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
-        GameManager.Instance.GameData.GameMode = GameData.Mode.easy;
-        OnStartNew?.Invoke();
+        StartGame(GameData.Mode.easy);
     }
 
     public void StartChallenge()
     {
-        cardManager.Redeal();
+        StartGame(GameData.Mode.challenge);
+    }
+
+    public void StartGame(GameData.Mode mode, bool replay = false)
+    {
+        cardManager.Redeal(!replay);
         foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
-        GameManager.Instance.GameData.GameMode = GameData.Mode.challenge;
-        OnStartNew?.Invoke();
+        GameManager.Instance.GameData.GameMode = mode;
+        WinText.SetActive(false);
+        if (!replay && !GameManager.Instance.GameData.IsWon) GameManager.Instance.GameData.WinningStreak = 0;
+        GameManager.Instance.GameData.IsWon = false;
+        if (!replay) OnStartNew?.Invoke();
     }
 
     public void Replay()
     {
-        cardManager.Redeal(false);
-        foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
-        GameManager.Instance.GameData.GameMode = GameData.Mode.challenge;
-        //OnStartNew?.Invoke();
+        StartGame(GameManager.Instance.GameData.GameMode, true);
     }
 }

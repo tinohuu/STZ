@@ -7,6 +7,7 @@ public class MissionManager : MonoBehaviour
 {
     [Header("Configuration")]
     public int MaxMissions = 4;
+    public int UpdateHours = 18;
     public List<Mission> CurMissions = new List<Mission>();
     public DateTime MissionUpdateDate = new DateTime();
 
@@ -29,6 +30,8 @@ public class MissionManager : MonoBehaviour
     // Delegate
     public GameManager.Handler OnOpenDaily = null;
     public GameManager.Handler OnDoneMission = null;
+    public GameManager.Handler OnDoneProgress = null;
+    public GameManager.Handler OnCollect = null;
 
     public static MissionManager Instance;
     private void Awake()
@@ -43,11 +46,18 @@ public class MissionManager : MonoBehaviour
         PresetRewards.Add(MidRewards);
         PresetRewards.Add(HardRewards);
         PresetRewards.Add(ExtraRewards);
+
     }
     void Start()
     {
-        //Mission.Initialize();
+        if (GameManager.Instance.Save != null)
+        {
+            MissionUpdateDate = GameManager.Instance.Save.MissionUpdateTime;
+            foreach (MissionData missionData in GameManager.Instance.Save.MissionDatas) CurMissions.Add(new Mission(missionData, false));
+        }
         CheckToAddNew();
+        MissionViewManager.Instance.UpdateView();
+        //CheckToAddNew();
     }
     private void Update()
     {
@@ -103,7 +113,6 @@ public class MissionManager : MonoBehaviour
                 }
             }
         }
-
         PresetMissionsCount = 0;
         foreach (List<MissionData> prsets in PresetMissions) PresetMissionsCount += prsets.Count;
     }
@@ -153,8 +162,13 @@ public class MissionManager : MonoBehaviour
 
     public void CheckToAddNew()
     {
-        if (CurMissions.Count < MaxMissions && MissionUpdateDate.Year == 1 && !MissionUpdateDate.Equals(DateTime.Today))
+        if (!DateTime.Now.Date.Equals(MissionUpdateDate.Date) && DateTime.Now.Hour >= UpdateHours || (DateTime.Now - MissionUpdateDate).TotalHours >= 24 || GameManager.Instance.CheatText.activeSelf)
         {
+            MissionUpdateDate = DateTime.Now;
+
+            foreach (Mission mission in CurMissions) mission.Clear();
+            CurMissions.Clear();
+
             // Add the done other mission.
             if (!hasDoneOther)
             {
@@ -190,7 +204,32 @@ public class MissionManager : MonoBehaviour
         }
 
     }
-
+    public void Collect(Mission mission)
+    {
+        RewardData rewardData = mission.MissionData.RewardData;
+        switch (rewardData.RewardType)
+        {
+            case RewardData.Type.deck:
+                SkinManager.Instance.DeckSkinDatas[rewardData.SkinId].Durability += rewardData.Count;
+                break;
+            case RewardData.Type.back:
+                SkinManager.Instance.BackSkinDatas[rewardData.SkinId].Durability += rewardData.Count;
+                break;
+            case RewardData.Type.shuffle:
+                GameManager.Instance.GameData.ShuffleCount += rewardData.Count;
+                break;
+            case RewardData.Type.hint:
+                GameManager.Instance.GameData.HintCount += rewardData.Count;
+                break;
+            case RewardData.Type.both:
+                GameManager.Instance.GameData.HintCount += rewardData.Count / 10;
+                GameManager.Instance.GameData.ShuffleCount += rewardData.Count % 10;
+                break;
+        }
+        mission.Clear();
+        CurMissions.Remove(mission);
+        OnCollect?.Invoke();
+    }
 }
 
 [System.Serializable]
@@ -200,7 +239,7 @@ public class Mission
     GameManager.Handler Done;
     GameManager.Handler DoneWithCons;
     GameManager.Handler DoneOther;
-    public Mission(MissionData missionData)
+    public Mission(MissionData missionData, bool initialiseReward = true)
     {
         MissionData = missionData;
         Done = new GameManager.Handler(_done);
@@ -218,7 +257,7 @@ public class Mission
                 SkinManager.Instance.OnUseDeck += Done;
                 break;
             case MissionData.Type.useBack:
-                SkinManager.Instance.OnUseDeck += Done;
+                SkinManager.Instance.OnUseBack += Done;
                 break;
             case MissionData.Type.playGame:
                 ViewManager.Instance.OnStartNew += DoneWithCons;
@@ -237,9 +276,11 @@ public class Mission
                 break;
             case MissionData.Type.doneOther:
                 MissionData.MaxProgress = MissionManager.Instance.MaxMissions - 1;
-                MissionManager.Instance.OnDoneMission += DoneOther;
+                MissionManager.Instance.OnCollect += DoneOther;
                 break;
         }
+
+        if (!initialiseReward) return;
         List<RewardData> rewardPool = new List<RewardData>();
         if (MissionData.Difficulty == 0) rewardPool = MissionManager.Instance.EasyRewards;
         else if (MissionData.Difficulty == 1) rewardPool = MissionManager.Instance.MidRewards;
@@ -249,6 +290,7 @@ public class Mission
         rewardData.Initialise();
         missionData.RewardData = rewardData;
     }
+
     void _done()
     {
         MissionData.Progress++;
@@ -261,8 +303,7 @@ public class Mission
         if (MissionData.noUndo && GameManager.Instance.GameData.UndoUses > 0) return;
         if (MissionData.noHint && GameManager.Instance.GameData.HintUses > 0) return;
         if (MissionData.noShuffle && GameManager.Instance.GameData.ShuffleUses > 0) return;
-        if (MissionData.isContinuous && GameManager.Instance.GameData.WinningStreak == 0) return;
-        MissionData.Progress++;
+        if (MissionData.isContinuous) MissionData.Progress = GameManager.Instance.GameData.WinningStreak;
         CheckToComplete();
     }
     void _doneOther()
@@ -278,11 +319,50 @@ public class Mission
     }
     public void CheckToComplete()
     {
+        MissionManager.Instance.OnDoneProgress?.Invoke();
         if (MissionData.Progress == MissionData.MaxProgress)
         {
             MissionManager.Instance.OnDoneMission?.Invoke();
             Debug.LogWarning("You've completed a mission!");
-            MissionManager.Instance.CurMissions.Remove(this);
+            //MissionManager.Instance.CurMissions.Remove(this);
+        }
+    }
+
+    public void Clear()
+    {
+        switch (MissionData.MissionType)
+        {
+            case MissionData.Type.getDeck:
+                SkinManager.Instance.OnGetDeck -= Done;
+                break;
+            case MissionData.Type.getBack:
+                SkinManager.Instance.OnGetBack -= Done;
+                break;
+            case MissionData.Type.useDeck:
+                SkinManager.Instance.OnUseDeck -= Done;
+                break;
+            case MissionData.Type.useBack:
+                SkinManager.Instance.OnUseBack -= Done;
+                break;
+            case MissionData.Type.playGame:
+                ViewManager.Instance.OnStartNew -= DoneWithCons;
+                break;
+            case MissionData.Type.winGame:
+                ViewManager.Instance.OnWin -= DoneWithCons;
+                break;
+            case MissionData.Type.useHint:
+                HintManager.Instance.OnHint -= DoneWithCons;
+                break;
+            case MissionData.Type.useShuffle:
+                ViewManager.Instance.OnShuffle -= Done;
+                break;
+            case MissionData.Type.openDaily:
+                MissionManager.Instance.OnOpenDaily -= Done;
+                break;
+            case MissionData.Type.doneOther:
+                MissionData.MaxProgress = MissionManager.Instance.MaxMissions - 1;
+                MissionManager.Instance.OnCollect -= DoneOther;
+                break;
         }
     }
 }
