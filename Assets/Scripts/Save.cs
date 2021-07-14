@@ -20,4 +20,5 @@ public class Save
     // Mission System
     public System.DateTime MissionUpdateTime = new System.DateTime();
     public List<MissionData> MissionDatas = new List<MissionData>();
+    public List<ExclusiveOffer> ExclusiveOffers = new List<ExclusiveOffer>();
 }

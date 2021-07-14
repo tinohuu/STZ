@@ -32,6 +32,7 @@ public class HandManager: MonoBehaviour
 
     public void OnPointerClick()
     {
+        if (GameManager.Instance.GameData.IsWon) return;
         gameManager.StartCountTime();
 
         // Reset hand

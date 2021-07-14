@@ -93,6 +93,8 @@ public class HintManager : MonoBehaviour
 
     public void Hint()
     {
+        if (GameManager.Instance.IsLocked) return;
+
         // Count moves
         hintMoves = gameManager.Moves;
 
@@ -154,7 +156,11 @@ public class HintManager : MonoBehaviour
         // Highlight hand card
         if (OriCardViews.Count == 0) FindObjectOfType<HandManager>().HighlightTimer = Time.time + 1;
 
-        OnHint?.Invoke();
+        if (OriCardViews.Count != 0)
+        {
+            OnHint?.Invoke();
+            GameManager.Instance.GameData.HintUses++;
+        }
     }
 
     Vector3? GetDestPos(Card card, Pile pile, bool isToFoundation = true, bool isToTableau = true)

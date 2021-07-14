@@ -37,6 +37,9 @@ public static class SaveSystem
         List<MissionData> missionDatas = new List<MissionData>();
         foreach (Mission mission in MissionManager.Instance.CurMissions) missionDatas.Add(mission.MissionData);
         save.MissionDatas = missionDatas;
+        List<ExclusiveOffer> exclusiveOffers = new List<ExclusiveOffer>();
+        foreach (EOView view in MissionViewManager.Instance.EOViews) exclusiveOffers.Add(view.Offer);
+        save.ExclusiveOffers = exclusiveOffers;
 
         BinaryFormatter bf = new BinaryFormatter();
 

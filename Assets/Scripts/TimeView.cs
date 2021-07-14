@@ -5,23 +5,21 @@ using UnityEngine.UI;
 
 public class TimeView : MonoBehaviour
 {
-    GameManager gameManager;
     float NextTimeScore = 30;
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>();
     }
     void Update()
     {
-        if (gameManager.Time >= 0)
+        if (GameManager.Instance.GameData.Time >= 0 && !GameManager.Instance.GameData.IsWon)
         {
-            if (Time.time - gameManager.Time >= NextTimeScore)
+            if (Time.time - GameManager.Instance.GameData.Time >= NextTimeScore)
             {
-                gameManager.Score -= 5;
+                GameManager.Instance.GameData.Score -= 5;
                 NextTimeScore += 30;
             }
 
-            float gameTime = Time.time - gameManager.Time;
+            float gameTime = Time.time - GameManager.Instance.GameData.Time;
             int minute = (int)gameTime / 60;
             string minuteText = minute >= 10 ? minute.ToString() : "0" + minute;
             int second = (int)gameTime % 60;

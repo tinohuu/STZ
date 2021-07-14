@@ -26,7 +26,7 @@ public class UndoManager : MonoBehaviour
 
     public void Undo()
     {
-        
+
         /*
         if (viewManager.IsAnyCardAnimating() || Undos.Count == 0) return;
 
@@ -101,6 +101,8 @@ public class UndoManager : MonoBehaviour
         }
         */
         //Debug.LogWarning("Test4");
+        if (GameManager.Instance.GameData.IsWon) return;
+
         Undos.Last().FromPile.Cards.Clear();
         foreach (SavedCard savedCard in Undos.Last().FromPileCards)
         {
@@ -124,6 +126,7 @@ public class UndoManager : MonoBehaviour
         FindObjectOfType<GameManager>().Moves++;
 
         // Trigger methods registered in OnUndo
+        GameManager.Instance.GameData.UndoUses++;
         OnUndo?.Invoke();
     }
 }

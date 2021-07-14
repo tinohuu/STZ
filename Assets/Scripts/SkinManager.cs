@@ -212,9 +212,9 @@ public class DeckSkinData : SkinData
     {
         set
         {
+            if (value > _durability) SkinManager.Instance.OnGetDeck?.Invoke();
+            else if (value < _durability) SkinManager.Instance.OnUseDeck?.Invoke();
             _durability = value;
-            if (value > _durability) SkinManager.Instance.OnGetDeck.Invoke();
-            else if (value < _durability) SkinManager.Instance.OnUseDeck.Invoke();
         }
         get => _durability;
     }
@@ -222,7 +222,7 @@ public class DeckSkinData : SkinData
     {
         Id = id;
         _durability = durability;
-        IsNew = isNew;
+        IsNew = Id == 0 ? false : isNew;
     }
 }
 
@@ -234,9 +234,9 @@ public class BackSkinData : SkinData
     {
         set
         {
+            if (value > _durability) SkinManager.Instance.OnGetBack?.Invoke();
+            else if (value < _durability) SkinManager.Instance.OnUseBack?.Invoke();
             _durability = value;
-            if (value > _durability) SkinManager.Instance.OnGetBack.Invoke();
-            else if (value < _durability) SkinManager.Instance.OnUseBack.Invoke();
         }
         get => _durability;
     }
@@ -244,7 +244,7 @@ public class BackSkinData : SkinData
     {
         Id = id;
         _durability = durability;
-        IsNew = isNew;
+        IsNew = Id == 0 ? false : isNew;
     }
 }
 

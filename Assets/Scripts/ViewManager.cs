@@ -29,7 +29,6 @@ public class ViewManager : MonoBehaviour
     UndoManager undoManager;
     GameManager gameManager;
     PileView DraggedFrom;
-    bool isAutoWinning = false;
     public static ViewManager Instance;
     public Dictionary<Card, CardView> CardToCardView = new Dictionary<Card, CardView>();
     public Dictionary<Pile, PileView> PileToPileView = new Dictionary<Pile, PileView>();
@@ -77,6 +76,7 @@ public class ViewManager : MonoBehaviour
         PileToPileView.Add(cardManager.Hand, HandView);
 
         gameManager.OnMove += new GameManager.Handler(ShowAutoWin);
+        gameManager.OnMove += new GameManager.Handler(CheckToWin);
         OnStartNew += () => Debug.Log("You started a new game.");
         OnWin += () => Debug.Log("You win.");
         OnShuffle += () => Debug.Log("You shuffled your hand.");
@@ -85,14 +85,10 @@ public class ViewManager : MonoBehaviour
     {
         Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
         if (!screenRect.Contains(Input.mousePosition) || Input.GetMouseButtonUp(0)) OnViewEndDrag();
-
-        //Debug.Log("PileViewCount " + PileToPileView.Count);
-        if (Input.GetKeyDown(KeyCode.X)) StartNew();
-        
     }
     public void OnViewBeginDrag(Card card)
     {
-        if (IsAnyCardAnimating() || isAutoWinning) return;
+        if (IsAnyCardAnimating() || GameManager.Instance.IsLocked) return;
 
         if (DraggedCardViews.Count > 0 && DraggedCardViews[0] )
         {
@@ -166,7 +162,7 @@ public class ViewManager : MonoBehaviour
         {
             if (TableauViews[i].Pile.Cards.Count == 0)
             {
-                if (DraggedCardViews[0].Card.Number == 13 || gameManager.IsAnyToEmptyPile)
+                if (DraggedCardViews[0].Card.Number == 13 || gameManager.IsCheated)
                 {
                     AlternativePileViews.Add(TableauViews[i]);
                     //DragToNew(PileViews[i]);
@@ -232,7 +228,7 @@ public class ViewManager : MonoBehaviour
     void DragToNew(PileView newPile)
     {
         // Start to count game time
-        if (gameManager.Time == -1) gameManager.Time = Time.time;
+        if (GameManager.Instance.GameData.Time == -1) GameManager.Instance.GameData.Time = Time.time;
 
 
         Card card = DraggedCardViews[0].Card;
@@ -262,10 +258,11 @@ public class ViewManager : MonoBehaviour
     }
     public void ShowAutoWin()
     {
-        if ((cardManager.IsAllFaceUp || GameManager.Instance.CheatText.activeSelf) && !isAutoWinning) AutoWinButton.SetActive(true);
+        if ((cardManager.IsAllFaceUp || GameManager.Instance.CheatText.activeSelf) && !GameManager.Instance.IsLocked) AutoWinButton.SetActive(true);
     }
     public void Shuffle()
     {
+        if (GameManager.Instance.GameData.IsWon) return;
         if (cardManager.Hand.Cards.Count + cardManager.Talon.Cards.Count == 0)
         {
             Debug.LogWarning("Noting to shuffle.");
@@ -275,6 +272,7 @@ public class ViewManager : MonoBehaviour
         foreach (PileView pile in TableauViews) pile.UpdatePileView();
         undoManager.Undos.Clear();
         FindObjectOfType<HandManager>().OnPointerClick();
+        GameManager.Instance.GameData.ShuffleUses++;
         OnShuffle?.Invoke();
     }
     public bool IsAnyCardAnimating()
@@ -295,8 +293,8 @@ public class ViewManager : MonoBehaviour
     public void AutoWin()
     {
         AutoWinButton.SetActive(false);
-        isAutoWinning = true;
         GameManager.Instance.GameData.IsWon = true;
+        GameManager.Instance.IsLocked = true;
         undoManager.Undos.Clear();
         StartCoroutine(AnimateAutoWin());
     }
@@ -356,12 +354,21 @@ public class ViewManager : MonoBehaviour
     public void Win()
     {
         WinText.SetActive(true);
-        isAutoWinning = false;
+        GameManager.Instance.IsLocked = false;
         GameManager.Instance.GameData.IsWon = true;
         GameManager.Instance.GameData.WinningStreak++;
         OnWin.Invoke();
     }
 
+    void CheckToWin()
+    {
+        if (!GameManager.Instance.GameData.IsWon)
+        {
+            int foundCount = 0;
+            foreach (Pile pile in CardManager.Instance.Foundations) foundCount += pile.Cards.Count;
+            if (foundCount == 13 * 4) Win();
+        }
+    }
     public void StartNew()
     {
         StartGame(GameData.Mode.normal);
@@ -379,12 +386,23 @@ public class ViewManager : MonoBehaviour
 
     public void StartGame(GameData.Mode mode, bool replay = false)
     {
+        if (GameManager.Instance.IsLocked) return;
+
         cardManager.Redeal(!replay);
+
         foreach (PileView pileView in PileToPileView.Values) pileView.UpdatePileView();
         GameManager.Instance.GameData.GameMode = mode;
-        WinText.SetActive(false);
+        GameManager.Instance.GameData.HintUses = 0;
+        GameManager.Instance.GameData.ShuffleUses = 0;
+        GameManager.Instance.GameData.UndoUses = 0;
+        GameManager.Instance.GameData.Time = -1;
+        GameManager.Instance.GameData.Score = 0;
+        GameManager.Instance.GameData.Moves = 0;
         if (!replay && !GameManager.Instance.GameData.IsWon) GameManager.Instance.GameData.WinningStreak = 0;
+
+        WinText.SetActive(false);
         GameManager.Instance.GameData.IsWon = false;
+
         if (!replay) OnStartNew?.Invoke();
     }
 

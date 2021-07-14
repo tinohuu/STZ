@@ -28,6 +28,10 @@ public class MissionView : MonoBehaviour
     {
         MissionManager.Instance.OnDoneProgress += new GameManager.Handler(DoneProgress);
     }
+    private void OnDestroy()
+    {
+        MissionManager.Instance.OnDoneProgress -= new GameManager.Handler(DoneProgress);
+    }
     public void UpdateView()
     {
         // Reward

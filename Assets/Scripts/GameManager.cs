@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Game Configuration")]
     public float SnapDistance = 180;
+    public Vector2 AnimSpeed = new Vector2(20, 30);
     public GameObject CheatText;
 
     [Header("Game Data")]
@@ -17,9 +18,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Inspected")]
     //public int Moves = 0;
-    public float Time = -1;
+    //public float Time = -1;
     public bool IsLocked = false;
-    public bool IsAnyToEmptyPile = false;
+    public bool IsCheated = false;
 
     public event Handler OnMove = null;
     //int _score = 0;
@@ -55,8 +56,8 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            IsAnyToEmptyPile = !IsAnyToEmptyPile;
-            CheatText.SetActive(IsAnyToEmptyPile);
+            IsCheated = !IsCheated;
+            CheatText.SetActive(IsCheated);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartCountTime()
     {
-        if (Time == -1) Time = UnityEngine.Time.time;
+        if (GameData.Time == -1) GameData.Time = UnityEngine.Time.time;
     }
     public void SetDrawCards(bool isThree)
     {
@@ -108,9 +109,9 @@ public class GameData
 {
     public enum Mode { normal, easy, challenge }
     public Mode GameMode = Mode.normal;
-    public int Score = 0;
+    int _score = 0;
     public int Moves = 0;
-    public float Time = 0;
+    public float Time = -1;
     public int UndoUses = 0;
     public int HintUses = 0;
     public int ShuffleUses = 0;
@@ -118,6 +119,12 @@ public class GameData
     public int ShuffleCount = 0;
     public int HintCount = 0;
     public bool IsWon = false;
+
+    public int Score
+    {
+        set { _score = value < 0 ? 0 : value; }
+        get => _score;
+    }
 }
 
 

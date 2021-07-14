@@ -15,7 +15,7 @@ public class Logo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > 5)
+        if (Time.time > 3)
         {
             SceneManager.LoadScene("Game");
         }
