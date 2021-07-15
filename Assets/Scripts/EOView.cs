@@ -24,6 +24,7 @@ public class EOView : MonoBehaviour
 
     public void Collect()
     {
+        ViewManager.Instance.Ad.SetActive(true);
         MissionManager.Instance.Collect(Offer.RewardData);
         MissionManager.Instance.OneDoneEO?.Invoke();
         Renew();

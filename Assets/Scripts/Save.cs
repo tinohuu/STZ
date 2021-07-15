@@ -21,4 +21,5 @@ public class Save
     public System.DateTime MissionUpdateTime = new System.DateTime();
     public List<MissionData> MissionDatas = new List<MissionData>();
     public List<ExclusiveOffer> ExclusiveOffers = new List<ExclusiveOffer>();
+    public ChallengeManagerData ChallengeManagerData = null;
 }

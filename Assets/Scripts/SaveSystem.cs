@@ -40,6 +40,7 @@ public static class SaveSystem
         List<ExclusiveOffer> exclusiveOffers = new List<ExclusiveOffer>();
         foreach (EOView view in MissionViewManager.Instance.EOViews) exclusiveOffers.Add(view.Offer);
         save.ExclusiveOffers = exclusiveOffers;
+        save.ChallengeManagerData = ChallengeManager.Instance.Data;
 
         BinaryFormatter bf = new BinaryFormatter();
 

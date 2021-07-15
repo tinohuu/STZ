@@ -35,6 +35,7 @@ public class ViewManager : MonoBehaviour
     public GameManager.Handler OnStartNew = null;
     public GameManager.Handler OnWin = null;
     public GameManager.Handler OnShuffle = null;
+    public GameObject Ad;
     private void Awake()
     {
         Instance = this;
@@ -330,6 +331,7 @@ public class ViewManager : MonoBehaviour
                 if (newPile != null)
                 {
                     cardManager.UpdateData(card, piles[i], newPile);
+                    GameManager.Instance.GameData.Moves++;
                     card.IsFaceUp = true;
                     foreach (PileView pileView in PileToPileView.Values) Debug.Log(pileView.name + pileView.Pile.Type);
                     PileToPileView[piles[i]].UpdatePileView();
