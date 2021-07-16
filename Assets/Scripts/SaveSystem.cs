@@ -54,20 +54,20 @@ public static class SaveSystem
         byte[] encryptedByte = Encrypt.AESHelper.Encrypt(byteSave);
 
         // Save
-        FileStream fileStream = File.Create(Application.dataPath + "/Saves" + "/Save.carta");
+        FileStream fileStream = File.Create(Application.persistentDataPath + "/Saves" + "/Save.carta");
         bf.Serialize(fileStream, encryptedByte);
         fileStream.Close();
 
-        return File.Exists(Application.dataPath + "/Saves" + "/Save.carta");
+        return File.Exists(Application.persistentDataPath + "/Saves" + "/Save.carta");
     }
     public static Save Load()
     {
-        if (File.Exists(Application.dataPath + "/Saves" + "/Save.carta"))
+        if (File.Exists(Application.persistentDataPath + "/Saves" + "/Save.carta"))
         {
             BinaryFormatter bf = new BinaryFormatter();
 
             // Load
-            FileStream fileStream = File.Open(Application.dataPath + "/Saves" + "/Save.carta", FileMode.Open);
+            FileStream fileStream = File.Open(Application.persistentDataPath + "/Saves" + "/Save.carta", FileMode.Open);
             byte[] encryptedByte = (byte[])bf.Deserialize(fileStream);
             fileStream.Close();
 

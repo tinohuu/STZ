@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
     public delegate void Handler();
     private void Awake()
     {
-        if (!Directory.Exists(Application.dataPath + "/Saves"))
-            Directory.CreateDirectory(Application.dataPath + "/Saves");
+        if (!Directory.Exists(Application.persistentDataPath + "/Saves"))
+            Directory.CreateDirectory(Application.persistentDataPath + "/Saves");
 
         Save = SaveSystem.Load();
         if (Save != null)

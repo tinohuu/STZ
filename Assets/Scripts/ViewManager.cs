@@ -35,7 +35,7 @@ public class ViewManager : MonoBehaviour
     public GameManager.Handler OnStartNew = null;
     public GameManager.Handler OnWin = null;
     public GameManager.Handler OnShuffle = null;
-    public GameObject Ad;
+    //public GameObject Ad;
     private void Awake()
     {
         Instance = this;
@@ -388,6 +388,7 @@ public class ViewManager : MonoBehaviour
 
     public void StartGame(GameData.Mode mode, bool replay = false)
     {
+        UndoManager.Instance.Undos.Clear();
         if (GameManager.Instance.IsLocked) return;
 
         cardManager.Redeal(!replay);

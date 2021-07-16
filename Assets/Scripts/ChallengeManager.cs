@@ -182,7 +182,7 @@ public class ChallengeManager : MonoBehaviour
     }
     public void ForceOpen()
     {
-        ViewManager.Instance.Ad.SetActive(true);
+        //ViewManager.Instance.Ad.SetActive(true);
         CurDayView.Data.IsForcedOpen = true;
         if (!Data.ChallengeDayDatas.Contains(CurDayView.Data)) Data.ChallengeDayDatas.Add(CurDayView.Data);
         foreach (ChallengeDayView v in EnabledDayViews) v.UpdateView();
